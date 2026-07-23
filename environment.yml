@@ -17,7 +17,10 @@ dependencies:
   - bioconductor-deseq2
   - bioconductor-edger
   - pandas
+  - numpy
   - biopython
+  - pyyaml        # benchmarking config
+  - matplotlib    # benchmarking plots
   # Java (for sRNAtoolbox JARs) and Nextflow (for nf-core/smrnaseq):
   - openjdk>=11
   - nextflow>=20.04.0

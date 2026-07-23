@@ -1,0 +1,64 @@
+# Benchmark configuration for smallRNAseq-DREAM
+# Edit paths/params, then: python run_benchmark.py --config config.yaml
+
+seed: 42
+
+# ---------------------------------------------------------------------------
+# Synthetic dataset generation (make_synthetic.py)
+# ---------------------------------------------------------------------------
+synthetic:
+  mode: mature            # "mature" (self-contained) or "genome" (needs genome + GFF3)
+  species_prefix: hsa     # miRBase prefix to draw from (hsa, ath, mmu, ...)
+  mature_fa: refs/mature.fa          # miRBase mature.fa (download; see data/MANIFEST.md)
+  # genome mode only:
+  genome_fa: refs/genome.fa          # reference genome (whitespace-stripped headers)
+  mirbase_gff3: refs/species.gff3    # miRBase GFF3 with precursor + mature coordinates
+
+  n_known: 150            # miRNAs kept in the reference given to the engines
+  n_novel: 30             # miRNAs HELD OUT of the reference -> truth set for novel detection
+  depth_total: 2_000_000  # total reads to simulate
+  decoy_fraction: 0.20    # fraction of reads that are non-miRNA noise
+  abundance_lognorm_sigma: 1.2   # spread of the per-miRNA abundance distribution
+  read_length: 50
+  adapter: TGGAATTCTCGGGTGCCAAGG   # 3' adapter appended before truncation (Illumina small RNA)
+  error_rate: 0.001       # per-base substitution rate
+  isomir_rate: 0.30       # fraction of reads with a 5'/3' shift (isomiR)
+  out_dir: synthetic
+
+# ---------------------------------------------------------------------------
+# Real-data runs (no absolute truth -> cross-engine concordance only)
+# ---------------------------------------------------------------------------
+real_data:
+  samples: [SRR950892, SRR950893, SRR950894, SRR950895]
+
+# ---------------------------------------------------------------------------
+# Engines to score. `run_dir` is where each pipeline wrote its output.
+# `parser` selects a function in parse_outputs.py. Set enabled:false to skip.
+# ---------------------------------------------------------------------------
+engines:
+  - name: mirdeep2
+    parser: mirdeep2
+    run_dir: runs/mirdeep2
+    enabled: true
+  - name: srnatoolbox
+    parser: srnatoolbox
+    run_dir: runs/srnatoolbox
+    enabled: true
+  - name: mirdp2
+    parser: mirdp2
+    run_dir: runs/mirdp2
+    enabled: true
+  - name: nfcore
+    parser: nfcore
+    run_dir: runs/nfcore
+    enabled: true
+
+# ---------------------------------------------------------------------------
+# Scoring thresholds
+# ---------------------------------------------------------------------------
+scoring:
+  min_count: 5            # a miRNA counts as "detected" at >= this many reads
+  novel_max_edit: 2       # predicted-novel matches truth if edit distance <= this (miRDP2 "variant" rule)
+  truth_counts: synthetic/truth_counts.tsv
+  novel_truth_fa: synthetic/novel_truth.fa
+  out_dir: results
