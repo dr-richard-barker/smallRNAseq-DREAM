@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this framework, please cite it and the underlying tools."
+title: "smallRNAseq-DREAM: a FAIR cross-species small RNA-seq analysis framework for spaceflight omics"
+authors:
+  - family-names: Barker
+    given-names: Richard John
+    # orcid: "https://orcid.org/XXXX-XXXX-XXXX-XXXX"   # TODO
+type: software
+repository-code: "https://github.com/dr-richard-barker/smallRNAseq-DREAM"   # TODO: confirm name
+license: MIT   # TODO: confirm — see NOTICE.md
+# version:      # TODO
+# date-released:  # TODO
+# doi:          # TODO: add Zenodo DOI after first release
+references:
+  - type: article
+    authors:
+      - family-names: Friedländer
+        given-names: Marc R.
+    title: "miRDeep2 accurately identifies known and hundreds of novel microRNA genes in seven animal clades"
+    journal: "Nucleic Acids Research"
+    volume: 40
+    start: 37
+    end: 52
+    year: 2012
