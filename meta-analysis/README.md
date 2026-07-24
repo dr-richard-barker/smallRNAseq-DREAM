@@ -20,12 +20,19 @@ are **standard RNA-seq, not small RNA-seq** — handled by the precursor-level r
 
 ## Run it
 
-```bash
-# 1. process the animal studies (real toolchain, your compute) -> runs/<OSD>/counts.tsv
-N=2 ./fetch_studies.sh            # N samples/study for a trial; drop N for all samples
+`fetch_studies.sh` reads `studies.tsv` and dispatches each study by its **`route`** column:
+`mirdeep2` (animal small RNA-seq → `../osdr/run_demo.sh`) or `precursor` (plant RNA-seq →
+`../smallrna_from_rnaseq/extract_smallrna.sh`, paired-end aware). Then it builds the matrix
+and figures.
 
-# 2. or build the matrix from whatever runs/ you already have:
+```bash
+N=2 ./fetch_studies.sh                 # all studies, N samples each (trial)
+KINGDOM=animal N=2 ./fetch_studies.sh  # just the mouse/human mature route
+KINGDOM=plant  N=2 ./fetch_studies.sh  # just the Arabidopsis precursor route
+
+# or, if you already have runs/<OSD>/counts.tsv:
 python build_count_matrix.py --runs runs/ --studies studies.tsv --out combined/
+python plot_meta.py --combined combined/ --out combined/figures --top 30
 ```
 
 ## Outputs (`combined/`)
@@ -37,6 +44,10 @@ python build_count_matrix.py --runs runs/ --studies studies.tsv --out combined/
 | `combined_wide_cpm.tsv` | miRNA × sample CPM matrix |
 | `mirna_prevalence.tsv` | per-ID: how many samples/studies detect it |
 | `family_prevalence.tsv` | **per-family** (species prefix stripped) — cross-species pooling |
+| `figures/heatmap_top_mirnas.png` | top-variance miRNAs × samples (log CPM), samples colour-barred by kingdom |
+| `figures/family_prevalence.png` | families by number of studies; cross-kingdom families highlighted |
+
+Figures are manuscript-ready (150 dpi PNG); regenerate any time with `plot_meta.py`.
 
 ## Two things this scaffold does NOT do (on purpose)
 

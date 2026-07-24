@@ -1,23 +1,37 @@
 #!/usr/bin/env bash
-# Fetch + process the animal small-RNA studies listed in studies.tsv, producing one
-# runs/<OSD-id>/counts.tsv per study, then build the combined matrix.
+# Fetch + process the studies in studies.tsv, dispatching each to the right pipeline by its
+# `route` column, producing runs/<OSD-id>/counts.tsv, then build the combined matrix + plots.
 #
-# Runs the real toolchain on YOUR compute (see ../osdr/run_demo.sh requirements).
-# For a quick trial, set N low (few samples per study) and start with one study.
+#   route=mirdeep2   -> animal small RNA-seq (mature)     via ../osdr/run_demo.sh
+#   route=precursor  -> plant standard RNA-seq (precursor) via ../smallrna_from_rnaseq/extract_smallrna.sh
+#
+# Runs the real toolchain on YOUR compute. Start small with N (samples/study).
+# Optional filter:  KINGDOM=plant ./fetch_studies.sh   (or animal); default = all.
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
-N="${N:-2}"                       # samples per study for a trial run
+N="${N:-2}"
 RUNS="${RUNS:-runs}"
-
-# animal (mature) studies verified to hold real small RNA-seq raw reads:
-STUDIES=(OSD-334 OSD-335 OSD-336 OSD-337 OSD-483)
+KINGDOM="${KINGDOM:-all}"
+TSV="$HERE/studies.tsv"
 
 mkdir -p "$RUNS"
-for osd in "${STUDIES[@]}"; do
-    echo "=================  $osd  ================="
-    OSD="$osd" N="$N" OUT="$RUNS/$osd" "$HERE/../osdr/run_demo.sh"
+# iterate studies.tsv (skip header), respecting the KINGDOM filter
+tail -n +2 "$TSV" | while IFS=$'\t' read -r osd organism kingdom layer route paired factor raw size title; do
+    [ -z "$osd" ] && continue
+    if [ "$KINGDOM" != "all" ] && [ "$KINGDOM" != "$kingdom" ]; then continue; fi
+    echo "=================  $osd  ($kingdom / $route)  ================="
+    case "$route" in
+        mirdeep2)
+            OSD="$osd" N="$N" OUT="$RUNS/$osd" "$HERE/../osdr/run_demo.sh" ;;
+        precursor)
+            OSD="$osd" N="$N" OUT="$RUNS/$osd" PAIRED="$paired" \
+                "$HERE/../smallrna_from_rnaseq/extract_smallrna.sh" ;;
+        *) echo "  unknown route '$route' for $osd — skipping" ;;
+    esac
 done
 
-echo "=================  meta-analysis  ================="
-python3 "$HERE/build_count_matrix.py" --runs "$RUNS" --studies "$HERE/studies.tsv" --out combined
-echo "Combined matrix in ./combined/ — see family_prevalence.tsv for cross-species hits."
+echo "=================  meta-analysis + plots  ================="
+python3 "$HERE/build_count_matrix.py" --runs "$RUNS" --studies "$TSV" --out combined
+python3 "$HERE/plot_meta.py" --combined combined --out combined/figures || \
+    echo "  (plotting skipped — install matplotlib)"
+echo "Combined matrix + figures in ./combined/"
