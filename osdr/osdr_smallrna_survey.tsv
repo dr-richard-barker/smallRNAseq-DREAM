@@ -1,0 +1,179 @@
+# 176 studies returned by OSDR small-RNA search terms
+# by kingdom: animal=156, plant=12, microbe=7, other=1
+accession	kingdom	organism	assay	gse	title
+OSD-101	animal	Mus musculus	Whole Transcriptome Bisulfite Sequencing     mass spectrometry     RNA Sequencing (RNA-Seq)     Whole Genome Bisulfite Sequencing		Rodent Research-1 (RR1) NASA Validation Flight: Mouse left gastrocnemi
+OSD-102	animal	Not Applicable     Mus musculus	mass spectrometry     Whole Genome Bisulfite Sequencing     RNA Sequencing (RNA-Seq)     Whole Transcriptome Bisulfite Sequencing		Rodent Research-1 (RR1) NASA Validation Flight: Mouse kidney transcrip
+OSD-103	animal	Not Applicable     Mus musculus	mass spectrometry     Whole Transcriptome Bisulfite Sequencing     Whole Genome Bisulfite Sequencing     RNA Sequencing (RNA-Seq)		Rodent Research-1 (RR1) NASA Validation Flight: Mouse quadriceps muscl
+OSD-104	animal	Mus musculus	RNA Sequencing (RNA-Seq)     Whole Genome Bisulfite Sequencing		Rodent Research-1 (RR1) NASA Validation Flight: Mouse soleus muscle tr
+OSD-105	animal	Not Applicable     Mus musculus	RNA Sequencing (RNA-Seq)     mass spectrometry     Whole Genome Bisulfite Sequencing     Whole Transcriptome Bisulfite Sequencing		Rodent Research-1 (RR1) NASA Validation Flight: Mouse tibialis anterio
+OSD-109	animal	Mus musculus	DNA microarray	E-GEOD-68874	Delayed Cardiomyocyte Response to Total Body Particle Radiation Exposu
+OSD-111	animal	Mus musculus	DNA microarray	GSE80223	Global gene expression analysis highlights microgravity sensitive key 
+OSD-115	animal	Homo sapiens	DNA microarray	E-GEOD-12647	Gene expression profiling in human fibroblast after low-LET irradiatio
+OSD-116	animal	Mus musculus	mass spectrometry     real time PCR		Biological and Metabolic Response in STS-135 Space-flown Mouse Skin
+OSD-117	animal	Mus musculus	DNA microarray	E-GEOD-68875	Delayed Cardiomyocyte Response to Total Body Particle Radiation Exposu
+OSD-118	animal	Homo sapiens	DNA microarray     DNA microarray		Transient gene expression profile changes of confluent human fibroblas
+OSD-125	animal	Homo sapiens	DNA microarray	GSE69271	mRNA expression profile in DLD-1 and MOLT-4 cancer cell lines cultured
+OSD-128	animal	Homo sapiens	miRNA Microarray	GSE20120	Identification of miRNAs involved in cell response to ionizing radiati
+OSD-129	animal	Homo sapiens	DNA microarray	GSE20173	Gene expression profiling of PBL in response to ionizing radiation and
+OSD-133	animal	Oryzias latipes	RNA Sequencing (RNA-Seq)	PRJDB5292	Acute transcriptional up-regulation specific to osteoblasts/osteoclast
+OSD-135	animal	Mus musculus	DNA microarray	GSE94381	Global gene expression analysis highlights microgravity sensitive key 
+OSD-155	animal	Homo sapiens	DNA microarray	E-GEOD-23515	Radiation responses in peripheral white blood cells of smokers and non
+OSD-160	animal	Mus musculus	DNA microarray	E-GEOD-61208	Gene expression data from 4T1 irradiated tumors treated with TGFbeta b
+OSD-182	animal	Homo sapiens	DNA microarray	E-GEOD-24945	Human skin fibroblast mitochondrial depletion, 0.5 Gy alpha-particle
+OSD-183	animal	Homo sapiens	DNA microarray	E-GEOD-55869	Radiation-induced bystander effects and gene expression in cells defic
+OSD-192	animal	Helix lucorum	RNA Sequencing (RNA-Seq)	PRJNA400816	Adaptive changes in the vestibular system of land snail to a 30-day sp
+OSD-194	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Rodent Research-3-CASIS: Mouse retina transcriptomic data
+OSD-195	animal	Homo sapiens	DNA microarray	GSE104999	Effects of 21 days of bedrest on human skeletal muscle gene expression
+OSD-198	animal	Homo sapiens	miRNA Microarray	GSE74469	Effects of bedrest and hypoxia on human skeletal muscle miRNA expressi
+OSD-202	animal	Mus musculus	RNA Sequencing (RNA-Seq)     DNA microarray     Reduced-Representation Bisulfite Sequencing		Low dose (0.04 Gy) irradiation (LDR) and hindlimb unloading (HLU) micr
+OSD-203	animal	Mus musculus	RNA Sequencing (RNA-Seq)     Reduced-Representation Bisulfite Sequencing		Low dose (0.04 Gy) irradiation (LDR) and hindlimb unloading (HLU) micr
+OSD-21	animal	Mus musculus	DNA microarray	GSE10533	Effects of spaceflight on murine skeletal muscle gene expression
+OSD-225	animal	Rattus norvegicus	DNA microarray	GSE93838	Expression profiling of soleus muscle under the effect of simulated sp
+OSD-238	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptomic analysis of dorsal skin from mice flown on the MHU-2 mi
+OSD-239	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptomic analysis of femoral skin from mice flown on the MHU-2 m
+OSD-240	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional analysis of dorsal skin from mice flown on the RR-5 mi
+OSD-241	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional analysis of femoral skin from mice flown on the RR-5 m
+OSD-25	animal	Mus musculus	DNA microarray		STS-135 Liver Transcriptomics
+OSD-253	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional analysis of kidneys from mice flown on the RR-7 missio
+OSD-255	animal	Mus musculus	RNA Sequencing (RNA-Seq)	GSE131954	Spaceflight influences gene expression, photoreceptor integrity, and o
+OSD-27	animal	Drosophila melanogaster	DNA microarray	E-MEXP-2082	Transcription profiling of Drosophila exposed to a levitation magnet f
+OSD-270	animal	Mus musculus	spatial transcriptomics     RNA Sequencing (RNA-Seq)		Bulk and spatially resolved transcriptional analysis of hearts from mi
+OSD-287	animal	Mus musculus	RNA Sequencing (RNA-Seq)	PRJNA400603	Murine TCR-beta repertoire sequencing
+OSD-288	animal	Mus musculus	RNA Sequencing (RNA-Seq)	PRJDB7956	Transcriptome analysis of murine spleen in space
+OSD-294	animal	Mus musculus	RNA Sequencing (RNA-Seq)	GSE136165	Efficient Identification of Multiple Pathways: RNA-Seq Analysis of Liv
+OSD-295	animal	Mus musculus	RNA Sequencing (RNA-Seq)	GSE102284	RNA-Seq transcriptome profiling of soleus from adult and aged mice fol
+OSD-297	animal	Homo sapiens	DNA microarray	GSE101299	Dynamic gene expression response to altered gravity in human myelomono
+OSD-32	animal	Mus musculus	DNA microarray	E_GEOD-12312	Effect of microgravity on brain gene expression in mice
+OSD-331	animal	Homo sapiens	RNA Sequencing (RNA-Seq)	GSE80292	Effect of microgravity on HUVECs (Human Umbilical vein Endothelial cel
+OSD-334	animal	Mus musculus	miRNA Sequencing		miRNA signature detection and countermeasures against HZE radiation ex
+OSD-335	animal	Mus musculus	miRNA Sequencing		miRNA signature detection and countermeasures against HZE radiation ex
+OSD-336	animal	Mus musculus	miRNA Sequencing		miRNA signature detection and countermeasures against HZE radiation ex
+OSD-337	animal	Mus musculus	miRNA Sequencing		miRNA signature detection and countermeasures against HZE radiation ex
+OSD-344	animal	Homo sapiens	real time PCR     real time PCR	GSE110560  GSE110561	Real-time quantitative PCR analysis of human cardiovascular progenitor
+OSD-352	animal	Mus musculus	spatial transcriptomics     RNA Sequencing (RNA-Seq)     single-cell RNA sequencing     single-cell ATAC-seq		Multi-modal transcriptional and chromatin accessibility analysis of br
+OSD-363	animal	Homo sapiens	real time PCR     real time PCR		Inflammatory gene expression signatures in idiopathic intracranial hyp
+OSD-364	animal	Homo sapiens	real time PCR     real time PCR		Inflammatory gene expression signatures in idiopathic intracranial hyp
+OSD-366	animal	Mus musculus	Genome-Wide Association Study     Immunostaining		Coalescence of DNA double strand breaks induced by galactic cosmic rad
+OSD-397	animal	Mus musculus	RNA Sequencing (RNA-Seq)     Reduced-Representation Bisulfite Sequencing	GSE159771	Illumina NGS RNA-seq and RRBS Sequencing on Spaceflight Mouse Retina
+OSD-4	animal	Mus musculus	DNA microarray	GSE18388	Microarray Analysis of Space-flown Murine Thymus Tissue
+OSD-401	animal	Mus musculus	RNA Sequencing (RNA-Seq)	GSE178822	Alternative splicing regulates the physiological adaptation of the mou
+OSD-402	animal	Mus musculus	single-cell RNA Sequencing		Single cell transcriptional profiling of femur bone marrow from mice f
+OSD-403	animal	Mus musculus	single-cell RNA Sequencing		Single cell transcriptional profiling of humerus bone marrow from mice
+OSD-404	animal	Mus musculus	single-cell RNA Sequencing		Single cell transcriptional profiling of peripheral blood mononuclear 
+OSD-405	animal	Mus musculus	single-cell RNA Sequencing		Single cell transcriptional profiling of spleens from mice flown on Ro
+OSD-418	animal	Rattus norvegicus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of gastrocnemius from rats exposed to partia
+OSD-419	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of the right gastrocnemius muscle from mice 
+OSD-420	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of spleens from mice flown on the RR-9 missi
+OSD-421	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of thymus from mice flown on the RR-9 missio
+OSD-422	animal	Rattus norvegicus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of gastrocnemius muscle from rats flown on t
+OSD-423	animal	Rattus norvegicus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of thymus tissue from rats flown on the SLS-
+OSD-426	animal	Mus musculus	RNA Sequencing (RNA-Seq)     miRNA Sequencing	GSE165565	Cerium oxide nanoparticle administration to skeletal muscle cells unde
+OSD-430	animal	Rattus norvegicus	DNA microarray	GSE119634	Modulation of gene expression in rat muscle cells following treatment 
+OSD-457	animal	Mus musculus	RNA Sequencing (RNA-Seq)	GSE152382	Expression profiles in multiple tissues of WT and Nrf2-knockout mouse 
+OSD-462	animal	Mus musculus	RNA Sequencing (RNA-Seq)     RNA Sequencing (RNA-Seq)     RNA Sequencing (RNA-Seq)     mass spectrometry     mass spectrometry		Transcriptional profiling, protein expression profiling, and phosphopr
+OSD-463	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of livers from mice flown on the RR-23 missi
+OSD-464	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of lungs from mice flown on the RR-23 missio
+OSD-48	animal	Mus musculus	RNA Sequencing (RNA-Seq)     mass spectrometry     Microscopy     Whole Genome Bisulfite Sequencing     Whole Transcriptome Bisulfite Sequencing		Rodent Research-1 (RR1) NASA Validation Flight: Mouse liver transcript
+OSD-481	animal	Homo sapiens	RNA Sequencing (RNA-Seq)	GSE193490	New insights into the role of lncRNA after spaceflight
+OSD-483	animal	Homo sapiens	RNA Sequencing (RNA-Seq)	GSE193331	small-RNA sequencing of sEV isolated from plasma of astronauts
+OSD-484	animal	Homo sapiens	DNA microarray	GSE198322	Astronauts plasma-derived exosomes induced gene expression in AC16 cel
+OSD-506	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of spleens from mice flown on the RR-23 miss
+OSD-512	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of adrenal glands from mice flown on the RR-
+OSD-513	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of kidneys from mice flown on the RR-23 miss
+OSD-515	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of thymus from mice flown on the RR-23 missi
+OSD-525	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of cerebellums from mice flown on the RR-23 
+OSD-532	animal	Mus musculus	RNA Sequencing (RNA-Seq)	GSE213808	Space flight mouse plasma cell-free RNA sequencing in Mouse Habitat Un
+OSD-536	animal	Mus musculus	DNA microarray	GSE186278	Gene expression profiling for spaceflight induced-neuroinflammation in
+OSD-54	animal	Homo sapiens	DNA microarray	E-GEOD-54213	Immune responses to the in vitro LPS assault engineered in the spacefl
+OSD-540	animal	Homo sapiens	RNA Sequencing (RNA-Seq)	GSE211204	Ten-day human unilateral lower limb suspension and active recovery in 
+OSD-546	animal	Homo sapiens	DNA microarray	GSE100930	SCD – Stem Cell Differentiation Toward Osteoblast Onboard the Internat
+OSD-55	animal	Homo sapiens	miRNA Microarray	E-GEOD-57400	microRNA expression profiles in human peripheral blood lymphocytes cul
+OSD-56	animal	Homo sapiens	DNA microarray	E-GEOD-57408	Gene expression profiling of human peripheral blood lymphocytes cultur
+OSD-561	animal	Mus musculus	spatial transcriptomics     RNA Sequencing (RNA-Seq)		Bulk RNA sequencing and spatially resolved transcriptional profiling o
+OSD-562	animal	Mus musculus	spatial transcriptomics     RNA Sequencing (RNA-Seq)		Bulk RNA sequencing and spatially resolved transcriptional profiling o
+OSD-563	animal	Mus musculus	spatial transcriptomics     RNA Sequencing (RNA-Seq)		Bulk RNA sequencing and spatially resolved transcriptional profiling o
+OSD-564	animal	Mus musculus	spatial transcriptomics     RNA Sequencing (RNA-Seq)		Bulk RNA sequencing and spatially resolved transcriptional profiling o
+OSD-576	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of tibialis anterior muscle from mice flown 
+OSD-577	animal	Homo sapiens	RNA Sequencing (RNA-Seq)		3D Human Umbilical Vein Endothelial Cells (HUVECs) irradiated with GCR
+OSD-580	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of heart tissue from mice flown on the RRRM-
+OSD-588	animal	Drosophila melanogaster	RNA Sequencing (RNA-Seq)		Drosophila parasitoids go to space: Unexpected effects of spaceflight 
+OSD-609	animal	Leptopilina heterotoma	RNA Sequencing (RNA-Seq)		Drosophila parasitoids go to space: Unexpected and differential effect
+OSD-61	animal	Mus musculus	DNA microarray	E-MTAB-2871	Effect of a 91 day long stay in weightlessness on the International Sp
+OSD-610	animal	Leptopilina boulardi	RNA Sequencing (RNA-Seq)		Drosophila parasitoids go to space: Unexpected and differential effect
+OSD-612	animal	Mus musculus	single-cell RNA sequencing     single-cell ATAC-seq     RNA Sequencing (RNA-Seq)		Bulk RNA sequencing and single nuclei transcriptomics and epigenomics 
+OSD-613	animal	Mus musculus	single-cell RNA sequencing     single-cell ATAC-seq     RNA Sequencing (RNA-Seq)		Bulk RNA sequencing and single nuclei transcriptomics and epigenomics 
+OSD-665	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of right extensor digitorum longus muscle fr
+OSD-666	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of right quadriceps femoris muscle from mice
+OSD-667	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of colon from mice flown on the RR-10 missio
+OSD-690	animal	Mus musculus	RNA Sequencing (RNA-Seq)	GSE240654	Nrf2 alleviates spaceflight-induced immunosuppression and thrombotic m
+OSD-714	animal	Mus musculus	RNA Sequencing (RNA-Seq)	PRJDB12944	Lunar gravity prevents skeletal muscle atrophy but not myofiber type s
+OSD-75	animal	Caenorhabditis elegans	miRNA Microarray	GSE27288	MicroRNA expression of C. elegans in space environment
+OSD-758	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Artificial Gravity Attenuates the Transcriptomic Response to Spaceflig
+OSD-759	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Artificial Gravity Attenuates the Transcriptomic Response to Spaceflig
+OSD-76	animal	Danio rerio	DNA microarray	E-MTAB-4476	Zebrafish larvae submitted to simulated microgravity on a clinostat (C
+OSD-770	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of soleus muscle from mice flown on the RR-2
+OSD-771	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of kidney tissue from mice flown on the Rode
+OSD-781	animal	Homo sapiens	RNA Sequencing (RNA-Seq)	GSE238215	Skeletal muscle-on-a-chip in microgravity as a platform for regenerati
+OSD-793	animal	Mus musculus	Reduced-Representation Bisulfite Sequencing     RNA Sequencing (RNA-Seq)	GSE268755  GSE268753	Mission SpaceX CRS-16 RRRM-1 space flight induced skin genomic plastic
+OSD-812	animal	Homo sapiens	RNA Sequencing (RNA-Seq)	GSE255750	Simulated microgravity impairs human NK cell cytotoxic activity agains
+OSD-83	animal	Oryzias latipes	RNA Sequencing (RNA-Seq)	DRA003542	Comparative Transcriptomic Analysis of Adult Medaka Tissues Sampled af
+OSD-863	animal	Homo sapiens	RNA Sequencing (RNA-Seq)	GSE259421	Effects of microgravity on human iPSC-derived neural organoids on the 
+OSD-871	animal	Homo sapiens	RNA Sequencing (RNA-Seq)	GSE259421	Effects of microgravity on human iPSC-derived neural organoids on the 
+OSD-876	animal	Mus musculus	RNA Sequencing (RNA-Seq)	GSE237099	Zfp697 is an RNA-binding protein that regulates skeletal muscle inflam
+OSD-880	animal	Mus musculus	RNA Sequencing (RNA-Seq)	GSE273092	Zfp697 is an RNA-binding protein that regulates skeletal muscle inflam
+OSD-899	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of cecum from mice flown on the RR-10 missio
+OSD-900	animal	Mus musculus	RNA Sequencing (RNA-Seq)		Transcriptional profiling of lungs from mice flown on the RR-10 missio
+OSD-904	animal	Mus musculus	miRNA Sequencing     single-cell RNA sequencing		MicroRNAs shape mouse age-independent tissue adaptation to spaceflight
+OSD-905	animal	Mus musculus	miRNA Sequencing     single-cell RNA sequencing		MicroRNAs shape mouse age-independent tissue adaptation to spaceflight
+OSD-906	animal	Mus musculus	miRNA Sequencing     single-cell RNA sequencing		MicroRNAs shape mouse age-independent tissue adaptation to spaceflight
+OSD-907	animal	Mus musculus	miRNA Sequencing		MicroRNAs shape mouse age-independent tissue adaptation to spaceflight
+OSD-908	animal	Mus musculus	miRNA Sequencing		MicroRNAs shape mouse age-independent tissue adaptation to spaceflight
+OSD-909	animal	Mus musculus	miRNA Sequencing     single-cell RNA sequencing		MicroRNAs shape mouse age-independent tissue adaptation to spaceflight
+OSD-910	animal	Mus musculus	miRNA Sequencing		MicroRNAs shape mouse age-independent tissue adaptation to spaceflight
+OSD-911	animal	Mus musculus	miRNA Sequencing     single-cell RNA sequencing		MicroRNAs shape mouse age-independent tissue adaptation to spaceflight
+OSD-912	animal	Mus musculus	miRNA Sequencing     single-cell RNA sequencing		MicroRNAs shape mouse age-independent tissue adaptation to spaceflight
+OSD-913	animal	Mus musculus	miRNA Sequencing		MicroRNAs shape mouse age-independent tissue adaptation to spaceflight
+OSD-914	animal	Mus musculus	miRNA Sequencing     single-cell RNA sequencing		MicroRNAs shape mouse age-independent tissue adaptation to spaceflight
+OSD-915	animal	Mus musculus	miRNA Sequencing     single-cell RNA sequencing		MicroRNAs shape mouse age-independent tissue adaptation to spaceflight
+OSD-916	animal	Mus musculus	miRNA Sequencing		MicroRNAs shape mouse age-independent tissue adaptation to spaceflight
+OSD-918	animal	Mus musculus	single-cell RNA sequencing	GSE295428	Spaceflight induces systemic effects on extracellular matrix and immun
+OSD-919	animal	Mus musculus	single-cell RNA sequencing	GSE295428	Spaceflight induces systemic effects on extracellular matrix and immun
+OSD-920	animal	Mus musculus	single-cell RNA sequencing	GSE295428	Spaceflight induces systemic effects on extracellular matrix and immun
+OSD-921	animal	Mus musculus	single-cell RNA sequencing	GSE295428	Spaceflight induces systemic effects on extracellular matrix and immun
+OSD-922	animal	Mus musculus	single-cell RNA sequencing	GSE295428	Spaceflight induces systemic effects on extracellular matrix and immun
+OSD-923	animal	Mus musculus	single-cell RNA sequencing	GSE295428	Spaceflight induces systemic effects on extracellular matrix and immun
+OSD-924	animal	Mus musculus	single-cell RNA sequencing	GSE295428	Spaceflight induces systemic effects on extracellular matrix and immun
+OSD-926	animal	Mus musculus	single-cell RNA sequencing	GSE295428	Spaceflight induces systemic effects on extracellular matrix and immun
+OSD-927	animal	Mus musculus	single-cell RNA sequencing	GSE295428	Spaceflight induces systemic effects on extracellular matrix and immun
+OSD-928	animal	Mus musculus	single-cell RNA sequencing	GSE295428	Spaceflight induces systemic effects on extracellular matrix and immun
+OSD-929	animal	Mus musculus	single-cell RNA sequencing	GSE295428	Spaceflight induces systemic effects on extracellular matrix and immun
+OSD-930	animal	Mus musculus	single-cell RNA sequencing	GSE295428	Spaceflight induces systemic effects on extracellular matrix and immun
+OSD-931	animal	Mus musculus	single-cell RNA sequencing	GSE295428	Spaceflight induces systemic effects on extracellular matrix and immun
+OSD-932	animal	Mus musculus	single-cell RNA sequencing	GSE295428	Spaceflight induces systemic effects on extracellular matrix and immun
+OSD-933	animal	Mus musculus	single-cell RNA sequencing	GSE295428	Spaceflight induces systemic effects on extracellular matrix and immun
+OSD-942	animal	Homo sapiens	DNA microarray	GSE226973	Exercise Training Attenuates the Muscle Mitochondria Genomic Response 
+OSD-946	animal	Homo sapiens	miRNA Microarray	GSE226504	Exercise Training Attenuates the Muscle Mitochondria Genomic Response 
+OSD-972	animal	Mus musculus	DNA microarray	GSE104121	Radiation-Induced Long Noncoding RNAs in a Mouse Model after Whole-Bod
+OSD-973	animal	Mus musculus	DNA microarray	GSE14290	Microarray analysis of differentially expressed genes in the kidneys a
+OSD-974	animal	Mus musculus	DNA microarray	GSE14290	Microarray analysis of differentially expressed genes in the kidneys a
+OSD-98	animal	Not Applicable     Mus musculus	mass spectrometry     Whole Genome Bisulfite Sequencing     RNA Sequencing (RNA-Seq)		Rodent Research-1 (RR1) NASA Validation Flight: Mouse adrenal gland tr
+OSD-256	microbe	Microbiota	Whole-Genome Shotgun Sequencing		NASA Aircraft Bioaerosol Collector (ABC) -2
+OSD-305	microbe	Serratia liquefaciens	RNA Sequencing (RNA-Seq)	GSE120390	Transcriptomic responses of Serratia liquefaciens cells grown under si
+OSD-362	microbe	Aspergillus fumigatus	RNA Sequencing (RNA-Seq)	PRJNA396210	An LaeA- and BrlA-Dependent Cellular Network Governs Tissue-Specific S
+OSD-466	microbe	Microbiota	Whole-Genome Shotgun Sequencing		Microbiome profiling of feces from mice flown on the RR-10 mission
+OSD-500	microbe	Staphylococcus aureus	mass spectrometry		Altered Quorum Sensing and Physiology of Staphylococcus aureus During 
+OSD-62	microbe	Saccharomyces cerevisiae	DNA microarray	E-GEOD-64468	Molecular mechanism of flocculation self-recognition in yeast and its 
+OSD-742	microbe	Microbiota	Whole-Genome Shotgun Sequencing		Metagenome profiling of feces from mice flown on the RRRM-1 mission
+OSD-50	other		DNA microarray		Evaluation of in vitro macrophage differentiation during space flight
+OSD-121	plant	Arabidopsis thaliana	DNA microarray     Image analysis     ELISA		Biological Research in Canisters-16 (BRIC-16): Transcriptomics, Glycom
+OSD-147	plant	Arabidopsis thaliana	DNA microarray	GSE81442	Arg1 functions in the physiological adaptation of undifferentiated pla
+OSD-17	plant	Arabidopsis thaliana	DNA microarray	E-MTAB-1009	Transcription profiling by array of the response of Arabidopsis cultiv
+OSD-205	plant	Arabidopsis thaliana	DNA microarray	GSE95388	HSFA2 functions in the physiological adaptation of undifferentiated pl
+OSD-208	plant	Arabidopsis thaliana	RNA Sequencing (RNA-Seq)     DNA microarray	GSE115555	Comparing RNA-Seq and microarray gene expression data in two zones of 
+OSD-320	plant	Arabidopsis thaliana	DNA microarray	GSE61484	Gamma radiation and HZE treatment of seedlings in Arabidopsis
+OSD-437	plant	Arabidopsis thaliana	RNA Sequencing (RNA-Seq)		Transcriptional and Post transcriptional Regulation of Seedling Develo
+OSD-46	plant	Arabidopsis thaliana	DNA microarray	E-GEOD-61484	Gamma radiation and HZE treatment of seedlings in Arabidopsis
+OSD-57	plant	Ceratopteris richardii	RNA Sequencing (RNA-Seq)	PRJNA168519	RNA-Seq analysis identifies potential modulators of gravity response i
+OSD-581	plant	Lolium multiflorum	mass spectrometry	PXD035041	A molecular study of Italian ryegrass grown on Martian regolith simula
+OSD-7	plant	Arabidopsis thaliana	DNA microarray	E-MTAB-1264	The Arabidopsis spaceflight transcriptome: a comparison of whole plant
+OSD-8	plant	Arabidopsis thaliana	DNA microarray	E-GEOD-29787	Gravitational and magnetic field variations synergize to cause subtle 
