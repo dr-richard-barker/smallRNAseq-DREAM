@@ -23,13 +23,17 @@ mature + hairpin) → SAMtools (feature counting) → edgeR (normalisation, MDS,
 Bowtie (align vs reference genome, QC) → mirtop (miRNA + isomiR annotation) → **miRDeep2**
 (known + novel discovery) → miRTrace (QC) → MultiQC (aggregate report).
 
-## Files to migrate here
+## Source files (archived offline)
+
+The original supporting files lived in the `smallRNAseq_mirDeep2_NFcore_DRB` repository,
+which was **deleted from GitHub** during consolidation before these were copied out:
 
 - `NF_core_smallRNA_pipeline` — the annotated pipeline breakdown + example commands for
-  testing accuracy on synthetic SRA data.
+  testing accuracy on synthetic SRA data. *(Its step-by-step content is summarised above.)*
 - `smallRNAseq_nf_cor_slurm_v2_for_OSDR` — SLURM + OSDR cluster integration plan.
-- Schematics (`smallRNAseq_analysis_pipeline_v1_NF_smRNAseq.png`, plan A/B images) →
-  [`../../docs/schematics/`](../../docs/schematics/).
+  **Not recovered** — supply from a local backup if available.
+- Pipeline schematics — see [`../../docs/schematics/`](../../docs/schematics/) for status.
 
-> **Note:** these two text files and the PNG are in the source repo but were not copied
-> into this scaffold automatically. Drop them in here during migration.
+> **Note:** the step list above preserves the pipeline logic. The full original text of
+> `NF_core_smallRNA_pipeline` and the SLURM/OSDR script were not captured before the source
+> repo was deleted; restore them here if a copy surfaces.
