@@ -61,25 +61,81 @@ sRNAtoolbox; cross-species; isomiR.
 
 ## 2. Materials and Methods
 
-2.1 **Pipelines compared** — Table 1 (tool/version/role/kingdom/citation; already drafted in
-    [`methods_tables.md`](methods_tables.md)):
-    - nf-core/smrnaseq (Plans A/B; the deconstruction) — [`../pipelines/nfcore_smrnaseq/`](../pipelines/nfcore_smrnaseq/)
-    - sRNAtoolbox: sRNAbench / sRNAde / mirNOVO (+ mirnaQC) — [`../pipelines/srnatoolbox/`](../pipelines/srnatoolbox/)
-    - miRDeep2 (animal) — [`../pipelines/mirdeep2_animal/`](../pipelines/mirdeep2_animal/)
-    - miRDeep-P2 / miRDP2 (plant; fork of TF-Chan-Lab) — [`../pipelines/mirdp2_plant/`](../pipelines/mirdp2_plant/)
-2.2 **Synthetic benchmark design** — reads simulated from miRBase miRNAs at defined
-    abundances; a held-out subset as ground-truth novels; isomiR/error/adapter/decoy model;
-    mature vs genome-anchored modes. Reference [`../benchmarking/`](../benchmarking/) and the
-    seeded `config.yaml` for exact parameters.
-2.3 **Real datasets** — SRR950892–95 (and any OSDR small RNA-seq accessions used); GeneLab
-    API / sra-tools acquisition; adapter and QC handling.
-2.4 **Scoring** — known-miRNA recall/precision/F1; quantification correlation (Spearman/
-    Pearson, log); novel precision/recall (sequence match ≤2 edits); cross-engine concordance
-    (Jaccard). Implemented in `score.py`.
-2.5 **Target prediction** — sRNAtoolbox miRNAconsTargets (animal & plant) and the BLAST
-    approach in [`../target_prediction/`](../target_prediction/).
-2.6 **Deployment / reproducibility** — Singularity/Docker, Nextflow, SLURM + OSDR
-    integration; conda `environment.yml`; FAIR data deposition.
+### 2.1 Pipelines compared *(draft prose)*
+
+Four small RNA-seq analysis engines were evaluated within a single framework, each
+implemented as an independent module ([`../pipelines/`](../pipelines/)). The community
+nf-core/smrnaseq pipeline [version] was used as the baseline and deconstructed into its
+component steps (Fig 1). Three further engines were run under a common interface: the
+sRNAtoolbox suite (mirnaQC, sRNAbench, sRNAde and mirNOVO) [version]; miRDeep2 [version] for
+animal miRNA prediction; and miRDeep-P2 (miRDP2) [version] for plant miRNA prediction, the
+latter derived from the TF-Chan-Lab pipeline (retaining upstream attribution and licence). On
+the basis of this comparison we defined a recommended cross-species route,
+SRA → mirnaQC → sRNAbench → sRNAde → mirNOVO. Tool versions, roles, kingdom applicability and
+citations are given in Table 1 ([`methods_tables.md`](methods_tables.md)).
+
+### 2.2 Synthetic benchmark design *(draft prose)*
+
+Because real sequencing runs lack a known truth set, engine accuracy was assessed on
+synthetic small RNA-seq data with defined ground truth (`benchmarking/make_synthetic.py`).
+Reads were simulated from miRBase [release] mature sequences: a fixed number of miRNAs were
+retained in the reference supplied to each engine (known set) while a disjoint subset was
+withheld to serve as ground-truth novel miRNAs. Per-miRNA abundances were drawn from a
+log-normal distribution and reads generated to a target depth, incorporating isomiR variation
+(1–2-nt 5′/3′ trimming or templated/non-templated addition), per-base sequencing error, 3′
+adapter read-through, and a defined fraction of non-miRNA decoy reads. Two simulation modes
+were provided: a self-contained *mature* mode (reads drawn from mature sequences; used for
+known-miRNA recovery and quantification) and a *genome-anchored* mode (reads drawn from
+precursor loci via a miRBase GFF3, so that folding-based predictors can rediscover held-out
+miRNAs from hairpin structure; used for the novel-discovery comparison, Fig 3). All parameters
+are fixed and version-controlled in a seeded configuration file (`benchmarking/config.yaml`;
+defaults: 150 known and 30 held-out miRNAs, 2 × 10⁶ reads, 20 % decoy fraction, 50-nt reads,
+0.1 % error rate, 30 % isomiR rate), making each dataset exactly reproducible.
+
+### 2.3 Real datasets *(draft prose)*
+
+Two sources of real data were used. Public human small RNA-seq runs SRR950892–SRR950895 were
+obtained from NCBI-SRA and used during miRDeep2 benchmarking; and spaceflight/radiation
+datasets were retrieved from NASA OSDR as described in §2.7 (animal small RNA-seq OSD-334–337
+and OSD-483; *Arabidopsis* RNA-seq OSD-208 and OSD-437). Reads were acquired with sra-tools
+[version] (`prefetch`/`fastq-dump`) or the OSDR API, converted to FASTA where required
+(seqkit [version]), and adapter-trimmed; the small-RNA 3′ adapter and read-length windows were
+set per study from the associated metadata (benchmark default adapter TGGAATTCTCGGGTGCCAAGG,
+minimum read length 18 nt). FASTA headers were stripped of whitespace as required by miRDeep2.
+
+### 2.4 Scoring *(draft prose)*
+
+Each engine's native output was normalised to a common format — a per-miRNA count table
+(`mirna_id, sample, count`) and a table of predicted novel miRNAs with sequences — using
+engine-specific parsers (`benchmarking/parse_outputs.py`). Four metrics were then computed
+(`benchmarking/score.py`). Known-miRNA detection was scored as recall, precision and F1, with
+a miRNA counted as detected above a fixed read threshold (default 5). Quantification accuracy
+was assessed as Spearman and Pearson correlations between simulated abundance and detected
+count on a log(1 + x) scale. Novel-miRNA discovery was scored as precision and recall against
+the held-out truth set, a prediction counted as correct when its mature sequence lay within a
+bounded edit distance (≤2, allowing a sliding offset) of a held-out sequence — mirroring the
+miRDeep-P2 "variant" criterion. Finally, cross-engine concordance was computed as the pairwise
+Jaccard index of detected-miRNA sets, a truth-free measure applicable to real runs.
+
+### 2.5 miRNA target prediction *(draft prose)*
+
+Predicted and known miRNAs were screened for targets using the sRNAtoolbox consensus target
+predictors (miRNAconsTargets), which provide separate animal and plant models, complemented by
+a BLAST-based search of candidate miRNA sequences against a nucleotide database
+([`../target_prediction/`](../target_prediction/)). The BLAST route is provided as an
+exploratory utility; for production use a local BLAST database or the consensus predictors are
+recommended over networked queries, and predicted targets require experimental validation.
+
+### 2.6 Deployment and reproducibility *(draft prose)*
+
+The framework is distributed as version-controlled code with a conda environment
+specification (`environment.yml`; e.g. Bowtie 1.3.1, ViennaRNA 2.6.4). Engines are run in
+containers for portability — Singularity for the sRNAtoolbox Java tools and Docker images
+where available — and the nf-core route is executed under Nextflow [version] with
+Docker/Singularity profiles; a SLURM configuration supports cluster and OSDR execution. In
+keeping with FAIR principles, all code is openly available on GitHub, large reference and
+test-data files are deposited to Zenodo (DOI [TODO]) rather than held in version control, and
+the synthetic benchmark is fully regenerable from its seeded configuration.
 
 ### 2.7 OSDR data retrieval and cross-study integration *(draft prose)*
 
