@@ -1,0 +1,8 @@
+osd_id	organism	kingdom	layer	factor	title	raw_fastq	approx_size_gb	verified
+OSD-334	Mus musculus	animal	mature	HZE radiation	miRNA signature detection and countermeasures against HZE radiation exposure	79	17.2	yes
+OSD-335	Mus musculus	animal	mature	HZE radiation	miRNA signature detection and countermeasures against HZE radiation exposure	80	21.3	yes
+OSD-336	Mus musculus	animal	mature	HZE radiation	miRNA signature detection and countermeasures against HZE radiation exposure	79	19.0	yes
+OSD-337	Mus musculus	animal	mature	HZE radiation	miRNA signature detection and countermeasures against HZE radiation exposure	78	17.2	yes
+OSD-483	Homo sapiens	animal	mature	Spaceflight (STS)	small-RNA sequencing of sEV isolated from plasma of astronauts	42	37.3	yes
+OSD-208	Arabidopsis thaliana	plant	precursor	Spaceflight (ISS)	Comparing RNA-Seq and microarray in two zones of the Arabidopsis root apex	NA	NA	rnaseq-not-smallrna
+OSD-437	Arabidopsis thaliana	plant	precursor	Microgravity	Transcriptional and Post-transcriptional Regulation of Seedling Development in Microgravity	NA	NA	rnaseq-not-smallrna
