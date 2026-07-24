@@ -81,6 +81,52 @@ sRNAtoolbox; cross-species; isomiR.
 2.6 **Deployment / reproducibility** — Singularity/Docker, Nextflow, SLURM + OSDR
     integration; conda `environment.yml`; FAIR data deposition.
 
+### 2.7 OSDR data retrieval and cross-study integration *(draft prose)*
+
+Spaceflight and radiation datasets were retrieved from the NASA Open Science Data Repository
+(OSDR) through its public REST API using a purpose-written client (`osdr/osdr_fetch.py`;
+Python standard library only). Candidate studies were identified with the search endpoint
+(`/osdr/data/search`, `type=cgene`) across the query terms *small RNA*, *microRNA*, *sRNA-seq*
+and *miRNA*, and each returned study was classified by organism into kingdom (animal, plant,
+microbe). This survey returned [N] studies (see Results); per-study file listings were then
+obtained from the files endpoint (`/osdr/data/osd/files/{id}`) and raw sequencing reads
+downloaded from the URLs it provides. For the meta-analysis we used the animal small RNA-seq
+cohort OSD-334, OSD-335, OSD-336 and OSD-337 (*Mus musculus*, high-charge-and-energy [HZE]
+radiation) and OSD-483 (*Homo sapiens*, astronaut plasma extracellular-vesicle small RNA-seq),
+together with the *Arabidopsis thaliana* RNA-seq studies OSD-208 and OSD-437 (Table 4). Each
+study was processed to a per-miRNA count table in a common long format
+(`mirna_id, sample, count`); tables were merged across studies with `meta-analysis/
+build_count_matrix.py`, which computes within-sample counts-per-million (CPM) and, to allow
+homologous miRNAs to be compared across species, collapses organism prefixes to a family label
+(e.g. mmu-miR-21-5p and hsa-miR-21-5p → miR-21-5p). Because library preparation, sequencing
+depth and organism differ between studies, CPM is reported only for within-sample scaling and
+no cross-study batch correction was applied; comparisons are therefore treated as
+hypothesis-generating. Counts derived from mature small RNA-seq and from RNA-seq precursor
+recovery (§2.8) are tagged with a `layer` field and never pooled (see §2.8).
+
+### 2.8 Recovering miRNA precursor signal from standard RNA-seq (plant route) *(draft prose)*
+
+No plant small RNA-seq dataset was present in OSDR at the time of analysis (§3.7); the
+available *Arabidopsis* spaceflight data are standard RNA-seq (OSD-208, Ovation Pico WTA;
+OSD-437, NEBNext Ultra II RNA). Because such libraries are fragmented and sequenced at read
+lengths well above the ~21-nt mature-miRNA size, mature miRNAs cannot be observed directly;
+however, plant primary miRNAs (pri-miRNAs) are RNA-polymerase-II transcripts that are capped
+and polyadenylated, so poly-A and total-RNA libraries retain miRNA-locus (precursor) signal.
+We therefore quantified precursor-level miRNA expression (`smallrna_from_rnaseq/
+extract_smallrna.sh`). Raw reads were retrieved as above; per sample, a read-length
+distribution was recorded (seqkit [version]) and the fraction of reads ≤30 nt reported as a
+diagnostic of whether any mature-length small RNAs survived library preparation. *Arabidopsis*
+(ath) mature and hairpin (precursor) sequences were obtained from miRBase [release] and
+converted from RNA to DNA. Reads were aligned to the hairpin precursors with Bowtie 2 [version]
+in local-alignment mode (`--local --no-unal`); paired-end libraries were aligned as read pairs
+(`--no-mixed --no-discordant`) and quantified as fragments rather than mates to avoid
+double-counting. Per-precursor read counts (samtools [version] `idxstats`) were written to the
+same common long format with `layer = precursor`, and integrated with the animal cohort as in
+§2.7. These values represent miRNA-gene (precursor) activity rather than mature-miRNA
+abundance and are analysed as a distinct measurement layer; a more rigorous alternative aligns
+reads to the genome and counts over miRBase MIR loci with a feature-counting step, which is
+preferable for multi-exon or overlapping loci.
+
 ## 3. Results
 
 3.1 **Deconstructing nf-core/smrnaseq** — the step map (Plan A → tidied Plan B); Fig 1.
