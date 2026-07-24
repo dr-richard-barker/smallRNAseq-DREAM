@@ -272,11 +272,77 @@ preferable for multi-exon or overlapping loci.
 
 ## 4. Discussion
 
-- Why the recommended route wins for cross-species (accuracy vs generality vs throughput).
-- Plant vs animal caveats (biogenesis, hairpin criteria, miRDP2 variant rule).
-- Limitations: synthetic-data realism, miRBase completeness, novel-call validation needs
-  wet-lab confirmation (qPCR), DB-version sensitivity of parsers.
-- Fit into the broader OSDR/GeneLab reanalysis and cross-species meta-analysis effort.
+*Draft prose. Claims that depend on benchmark values are written conditionally and marked
+**[NEEDS BENCHMARK]**; design- and survey-based statements stand as written.*
+
+### 4.1 An integrated route for cross-species reanalysis
+
+Deconstructing nf-core/smrnaseq (Fig 1) makes clear that a small RNA-seq workflow is a chain of
+separable decisions — QC, adapter handling, alignment, quantification, differential expression
+and novel-miRNA discovery — each with several tool options. The route we recommend
+(SRA → mirnaQC → sRNAbench → sRNAde → mirNOVO) collapses most of these phases into a few
+interoperable tools, reducing the integration and glue-code burden of assembling the full
+multi-step pipeline while retaining known-miRNA quantification, isomiR annotation, differential
+expression and de-novo discovery. The case for this route rests on three axes — accuracy,
+cross-species generality and throughput. Its throughput and generality advantages follow from
+its design and containerised deployment; whether it matches or exceeds the alternatives on
+accuracy is the question the benchmark answers directly, and should be stated from those
+results [NEEDS BENCHMARK: relative known-miRNA recovery, quantification correlation and
+novel-discovery precision/recall across engines].
+
+### 4.2 Analysis must respect kingdom-specific biology
+
+Because miRNA biogenesis differs between animals and plants (§1.2), no single predictor is
+appropriate for both, and the framework keeps miRDeep2 (animal) and miRDeep-P2 (plant) as
+parallel arms rather than forcing one model across kingdoms. This choice is reflected even in
+evaluation: our scoring counts a predicted novel miRNA as correct when its mature sequence lies
+within two edits of a held-out truth sequence, mirroring the miRDeep-P2 "variant" criterion, so
+that the same yardstick is defensible in both kingdoms. A framework that ignores these
+differences risks systematically mis-calling novel miRNAs in whichever kingdom it was not tuned
+for.
+
+### 4.3 A gap in the spaceflight record: no plant small RNA-seq
+
+Surveying OSDR returned no plant small RNA-seq dataset: every plant study among the small-RNA
+search hits is a microarray or bulk mRNA-seq experiment, whereas the small RNA-seq record is
+animal-dominated. Given the breadth of plant spaceflight biology, this is a substantive gap —
+miRNA-level regulation of plant responses to microgravity and radiation is effectively
+uncharacterised by dedicated sequencing in the public spaceflight record. It argues for
+generating and depositing plant small RNA-seq from missions where plant material is already
+flown. In the interim, recovering miRNA-precursor signal from existing plant RNA-seq offers a
+partial, hypothesis-generating view: because plant pri-miRNAs are polyadenylated Pol II
+transcripts, standard libraries retain MIR-locus expression even though the mature ~21-nt
+product is lost to fragmentation and size selection. We stress that these precursor counts
+measure miRNA-gene activity, not mature-miRNA abundance — precursor level and mature level can
+be decoupled by processing and turnover — and we therefore keep the two as distinct measurement
+layers and never pool them. The per-sample read-length diagnostic makes the underlying
+limitation visible rather than assumed.
+
+### 4.4 Limitations
+
+Several limitations bound the interpretation. The benchmark uses simulated reads: while these
+provide the absolute ground truth real runs lack, they may not reproduce every library artefact,
+and the self-contained *mature* simulation mode is deliberately conservative for novel discovery
+(the genome-anchored mode is the fair test). Results depend on miRBase completeness and release,
+and the per-engine output parsers are sensitive to tool version and output layout (flagged in
+the code) and should be re-checked against one real run of each engine. In the meta-analysis,
+counts are CPM-normalised within sample only; no cross-study batch correction is applied, so
+cross-study patterns are hypothesis-generating, and the family-level pooling used for
+cross-species comparison is a prefix-strip heuristic that should be verified against curated
+miRBase families for any load-bearing claim. Novel-miRNA predictions, in either kingdom, require
+experimental validation (e.g. qPCR or dedicated small RNA-seq). Finally, the OSDR demonstration
+is necessarily on animal data, because the plant small RNA-seq it would ideally use does not yet
+exist.
+
+### 4.5 Fit and outlook
+
+The framework is intended to slot into the broader OSDR/GeneLab reanalysis and cross-species
+meta-analysis effort: studies are added by listing an accession, and the same common count
+format carries animal mature-miRNA and plant precursor data through to a joint, layer-aware
+matrix. Its immediate utility is reproducible reanalysis of the existing animal spaceflight and
+radiation miRNA datasets; its forward value is that it is ready to process dedicated plant
+spaceflight small RNA-seq the moment such data are deposited — turning the gap identified here
+into a concrete target for the community.
 
 ## 5. Conclusions
 
