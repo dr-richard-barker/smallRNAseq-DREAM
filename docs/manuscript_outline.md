@@ -7,6 +7,33 @@ real. No numbers are invented here.*
 
 ---
 
+## Remaining fill-ins before submission
+
+Drafted in full prose: Abstract, §1 Introduction, §2 Methods (2.1–2.8), §4 Discussion,
+§5 Conclusions, and captions for Fig 1–5 + S1–S2. What is left, grouped by what unblocks it:
+
+- [ ] **Run the benchmark** (`benchmarking/` on all four engines) — the single biggest gate.
+  Unblocks: **§3 Results** (3.2–3.5 prose), **Fig 2, Fig 3, Fig S1**, **Table 3**, the Abstract
+  and Discussion §4.1 headline numbers, and the `[N]` sample/study counts in Fig 4/5.
+  All `**[NEEDS BENCHMARK]**` tags resolve here. First verify the `CONFIRM:` parser lines in
+  `benchmarking/parse_outputs.py` against one real run per engine.
+- [ ] **Deposit the Zenodo bundle** → replace `[TODO]` DOI in the Abstract, Availability,
+  `data/MANIFEST.md`, `CITATION.cff`, and the archive-notice banner. Cite the **concept DOI**.
+- [ ] **Citations** — fill every `[ref]` (Intro §1.1–1.4) and `[Barker et al., ref]` (author's
+  OSDR/GeneLab work), plus Table 1 tool citations (full authors/years/DOIs).
+- [ ] **Tool versions / DB release** — fill each `[version]` (nf-core, sRNAtoolbox, miRDeep2,
+  miRDeep-P2, Bowtie 2, samtools, seqkit, sra-tools, Nextflow) and `[release]` (miRBase) from
+  the run environment. `environment.yml` pins Bowtie 1.3.1 / ViennaRNA 2.6.4.
+- [ ] **Survey count `[N]`** — the OSDR small-RNA study total (176 at survey time; refresh from
+  `osdr/osdr_smallrna_survey.tsv`) in §2.7 and §3.7.
+- [ ] **Fig 1** — swap in the original schematic if a backup surfaces (current panel is a
+  reproducible remake; original lost with the deleted hub repo).
+- [ ] **Fig S2** — optional; include only if a worked miRNA→target example is run.
+- [ ] **Front/back matter** — author list + ORCID, funding/acknowledgements, competing
+  interests; **decide target journal** → set length/format (full paper vs Application Note).
+
+---
+
 ## Working titles
 
 1. *smallRNAseq-DREAM: a FAIR, cross-species small RNA-seq analysis framework benchmarked
@@ -471,13 +498,14 @@ experimental validation. Generated from [`../target_prediction/`](../target_pred
 
 ---
 
-## What's still needed before submission (checklist)
+## Progress log (done)
 
-- [ ] Run `benchmarking/` for real on all four engines → fills every **[NEEDS BENCHMARK]**.
-- [ ] Verify the `CONFIRM:` parser lines against one real run of each engine.
-- [x] Fig 1: regenerated as a remake (`docs/schematics/fig1_pipeline_overview.svg`). Originals lost with the deleted hub repo; swap back in if a backup surfaces.
-- [x] Fig 4 & Fig 5: meta-analysis figures wired (`meta-analysis/plot_meta.py`, captions drafted); regenerate the panels from the full OSDR run and fill the `[N]` counts.
-- [ ] Finalise Table 1 citations (full author lists, years, DOIs).
-- [x] List the OSDR spaceflight accessions used (Table 4 / availability): OSD-334–337, 483, 208, 437.
-- [ ] Deposit synthetic data to Zenodo; insert the DOI.
-- [ ] Decide target journal → match length/format (full paper vs Application Note).
+*Open items live in the "Remaining fill-ins before submission" checklist at the top.*
+
+- [x] All narrative sections drafted in prose: Abstract, §1, §2.1–2.8, §4, §5.
+- [x] Captions drafted for Fig 1–5 and Fig S1–S2.
+- [x] Fig 1 regenerated as a reproducible remake (`docs/schematics/fig1_pipeline_overview.svg`).
+- [x] Fig 4 & Fig 5 wired (`meta-analysis/plot_meta.py`), captions drafted.
+- [x] OSDR cohort verified + tabulated (Table 4 / Availability): OSD-334–337, 483, 208, 437.
+- [x] OSDR fetch, meta-analysis, and plant precursor modules built and tested on mock data.
+- [x] Zenodo bundle assembled with checksums + metadata (deposit pending → DOI).
