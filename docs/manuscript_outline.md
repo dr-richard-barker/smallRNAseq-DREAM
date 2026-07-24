@@ -28,17 +28,33 @@ real. No numbers are invented here.*
 
 ---
 
-## Abstract (structured, ~250 words)
+## Abstract (structured, ~250 words) *(draft prose)*
 
-- **Background** — miRNAs regulate stress responses; spaceflight small RNA-seq data in NASA
-  OSDR span plants and animals; no single agreed pipeline for cross-species reanalysis.
-- **Results** — we deconstructed nf-core/smrnaseq and benchmarked four engines against a
-  synthetic ground-truth dataset for known-miRNA quantification and novel-miRNA discovery,
-  split by kingdom. **[NEEDS BENCHMARK: headline recall/precision/correlation numbers]**
-  We recommend the route SRA → mirnaQC → sRNAbench → sRNAde → mirNOVO for cross-species work.
-- **Conclusions** — a FAIR, containerised framework (code + synthetic benchmark + data DOI)
-  that makes spaceflight small RNA-seq reanalysis reproducible.
-- **Availability** — GitHub + Zenodo DOI.
+**Background.** Small RNA sequencing (small RNA-seq) is the standard method for profiling
+microRNAs (miRNAs), but its analysis is unusually tool-dependent, and because miRNA biogenesis
+differs between animals and plants no single pipeline is agreed for cross-species work.
+Spaceflight omics in NASA's Open Science Data Repository (OSDR) span both kingdoms, yet FAIR,
+reproducible reanalysis of their small-RNA data remains difficult.
+
+**Results.** We consolidated five overlapping analysis efforts into one framework,
+deconstructed the community nf-core/smrnaseq pipeline, and benchmarked four engines
+(nf-core/smrnaseq, sRNAtoolbox, miRDeep2 and miRDeep-P2) against synthetic data with absolute
+ground truth, scoring known-miRNA recovery, quantification accuracy and novel-miRNA discovery
+in both animal and plant modes [NEEDS BENCHMARK: headline recall/precision/correlation]. On
+this basis we recommend the cross-species route SRA → mirnaQC → sRNAbench → sRNAde → mirNOVO.
+Applying the framework to OSDR, we find it currently contains no plant small RNA-seq; we
+therefore demonstrate a cross-study meta-analysis of the available animal spaceflight and
+radiation miRNA datasets, and recover precursor-level miRNA signal from standard *Arabidopsis*
+RNA-seq, keeping mature and precursor measurements as distinct layers.
+
+**Conclusions.** smallRNAseq-DREAM is a FAIR, containerised small RNA-seq framework that
+provides an evidence-based cross-species pipeline recommendation, a reusable synthetic
+benchmark, and NASA OSDR integration — reproducible today on animal spaceflight data and
+positioned to process plant spaceflight small RNA-seq as it becomes available.
+
+**Availability.** Code: https://github.com/dr-richard-barker/smallRNAseq-DREAM (project site
+https://dr-richard-barker.github.io/smallRNAseq-DREAM/); reference and benchmark data on Zenodo
+(DOI [TODO]).
 
 ## Keywords
 
