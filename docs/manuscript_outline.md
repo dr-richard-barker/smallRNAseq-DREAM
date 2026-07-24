@@ -49,15 +49,65 @@ sRNAtoolbox; cross-species; isomiR.
 
 ## 1. Introduction
 
-1.1 miRNA biology and why small RNA-seq is hard (short reads, adapter handling, isomiRs,
-    novel-miRNA calling, plant vs animal biogenesis differences).
-1.2 The spaceflight context — NASA OSDR/GeneLab, cross-species and cross-kingdom datasets,
-    the reproducibility/FAIR imperative. *(Cite the author's related OSDR/GeneLab work.)*
-1.3 The problem: many tools, no consensus route; plant and animal predictors differ
-    (miRDeep2 vs miRDeep-P2); browser tools vs command-line/high-throughput.
-1.4 Contribution: (i) a deconstruction of nf-core/smrnaseq, (ii) a four-engine benchmark on
-    synthetic ground truth, (iii) a recommended cross-species route, (iv) a FAIR,
-    containerised, openly-deposited framework.
+*Draft prose. Literature citations are marked `[ref]`; the author's own related work is marked
+`[Barker et al., ref]`. Fill from the reference manager before submission.*
+
+### 1.1 microRNAs and the challenges of small RNA-seq
+
+MicroRNAs (miRNAs) are ~21–22-nucleotide endogenous non-coding RNAs that regulate gene
+expression post-transcriptionally and are central to development and stress responses across
+eukaryotes [ref]. Measuring them by sequencing (small RNA-seq) carries analytical challenges
+that set it apart from bulk RNA-seq. Because the mature molecule is shorter than the sequenced
+fragment, the 3′ adapter must be detected and removed before reads can be mapped, and identical
+reads are collapsed to unique sequences for quantification. Mature miRNAs must then be
+distinguished both from other small-RNA classes (small interfering RNAs, piwi-interacting RNAs,
+and tRNA- and rRNA-derived fragments) and from the length and sequence variants of a single
+miRNA (isomiRs) [ref]. Identifying *novel* miRNAs is harder still: it requires evaluating the
+predicted secondary (hairpin) structure of the candidate precursor rather than relying on
+alignment alone [ref]. As a result, numerous specialised tools have been developed, and
+reported miRNA repertoires and abundances can depend materially on the choices made at each
+analytical step.
+
+### 1.2 Kingdom-specific miRNA biology
+
+miRNA biogenesis differs fundamentally between animals and plants, and this difference has
+direct consequences for analysis. In animals, primary transcripts are processed sequentially
+by the Drosha/DGCR8 complex and Dicer, and mature miRNAs typically repress targets through
+seed-region base-pairing, most often in 3′ untranslated regions [ref]. In plants, processing is
+carried out largely by a single Dicer-like enzyme (DCL1), mature miRNAs are 2′-O-methylated by
+HEN1, and they generally direct cleavage of highly complementary target transcripts [ref].
+These distinctions are embedded in the prediction software: animal-oriented callers such as
+miRDeep2 and plant-specific callers such as miRDeep-P2 apply different precursor length,
+structure and conservation criteria [ref]. Any framework intended to operate across kingdoms
+must therefore accommodate both models rather than assume one.
+
+### 1.3 Spaceflight biology and the reproducibility imperative
+
+Spaceflight exposes organisms to microgravity and ionising radiation, provoking stress and
+adaptive responses in which miRNAs have been implicated in both animal and plant systems [ref].
+NASA's Open Science Data Repository (OSDR; formerly the GeneLab Data System) makes spaceflight
+omics data openly available across a wide range of organisms, creating an opportunity for
+cross-species and even cross-kingdom reanalysis [ref]. Realising that opportunity depends on
+FAIR (Findable, Accessible, Interoperable, Reusable) and reproducible analysis pipelines
+[Barker et al., ref]. For small RNA-seq specifically, that goal is undercut by the tool
+heterogeneity described above and by the practical gap between convenient browser-based
+services and the command-line, containerised workflows needed for reproducible, high-throughput
+reanalysis of repository-scale data.
+
+### 1.4 This work
+
+We address these needs with a consolidated, cross-species small RNA-seq analysis framework. We
+(i) deconstruct the community nf-core/smrnaseq pipeline to expose its per-step structure and
+tool choices; (ii) benchmark four analysis engines (nf-core/smrnaseq, sRNAtoolbox, miRDeep2 and
+miRDeep-P2) against synthetic data with absolute ground truth, quantifying known-miRNA recovery,
+quantification accuracy and novel-miRNA discovery across kingdoms; (iii) recommend a single
+cross-species route, SRA → mirnaQC → sRNAbench → sRNAde → mirNOVO; and (iv) package the result
+as a FAIR, containerised, openly deposited framework and demonstrate it on NASA OSDR
+spaceflight and radiation datasets. In doing so we document that OSDR currently contains no
+plant small RNA-seq, and show how the framework both integrates the available animal
+small RNA-seq into a cross-study meta-analysis and recovers precursor-level miRNA signal from
+existing plant RNA-seq — positioning it to process dedicated plant small RNA-seq as such data
+become available.
 
 ## 2. Materials and Methods
 
