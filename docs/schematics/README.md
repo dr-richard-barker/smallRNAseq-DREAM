@@ -1,23 +1,33 @@
 # Schematics
 
-**Status: originals not available in this repository.**
+## Figure 1 (regenerated remake)
 
-The Plan A / Plan B pipeline schematics and the deconstruction figure
-(`smallRNAseq_analysis_pipeline_v1_NF_smRNAseq.png` / `.pdf`) originally lived in the
-`smallRNAseq_mirDeep2_NFcore_DRB` repository, which was **deleted from GitHub** during the
-consolidation. The binary figures were not copied out before deletion and are not present
-on the working machine, so they could not be migrated here.
+![Figure 1 — nf-core/smrnaseq deconstructed vs. the DREAM route](fig1_pipeline_overview.svg)
 
-The **pipeline logic they depicted is preserved textually** in:
+`fig1_pipeline_overview.svg` is a **new remake** of the lost Plan A/B schematic, built from
+the documented pipeline steps by [`make_fig1.py`](make_fig1.py). It shows the nf-core/smrnaseq
+pipeline (deconstructed) beside the recommended cross-species "DREAM" route, grouped by
+shared analysis phase so the collapse of many nf-core steps into the integrated sRNAtoolbox
+tools is visible. Workflow only — no results are depicted.
 
-- [`../00_pipeline_decision.md`](../00_pipeline_decision.md) — the Plan A/B/C/D narrative
-- [`../../pipelines/nfcore_smrnaseq/README.md`](../../pipelines/nfcore_smrnaseq/README.md) — the deconstructed step list
+Regenerate / edit:
 
-## To restore the figures
+```bash
+python make_fig1.py                 # -> fig1_pipeline_overview.svg
+# export for the manuscript (needs librsvg or inkscape):
+rsvg-convert -f png -o fig1.png fig1_pipeline_overview.svg
+```
 
-If a copy exists (another machine, a backup, Zenodo, or the linked Google Doc), drop the
-files in this directory. Alternatively they can be regenerated as new diagrams from the
-documented steps — if so, label them clearly as remakes, not the originals.
+It is a schematic reconstruction, **not** the original figure — label it as such if a
+reviewer needs the provenance.
 
-> Manuscript Fig 1 depends on this — see the checklist in
-> [`../manuscript_outline.md`](../manuscript_outline.md).
+## Original figures (lost)
+
+The original Plan A / Plan B schematics and the deconstruction figure
+(`smallRNAseq_analysis_pipeline_v1_NF_smRNAseq.png` / `.pdf`) lived in the
+`smallRNAseq_mirDeep2_NFcore_DRB` repository, which was **deleted from GitHub** during
+consolidation before the binaries were copied out; they are not on the working machine
+either. If a copy surfaces (another machine, a backup, Zenodo, or the linked Google Doc),
+drop it here. The pipeline logic they depicted is preserved textually in
+[`../00_pipeline_decision.md`](../00_pipeline_decision.md) and
+[`../../pipelines/nfcore_smrnaseq/README.md`](../../pipelines/nfcore_smrnaseq/README.md).

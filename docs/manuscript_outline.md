@@ -114,7 +114,7 @@ recommendation and an openly-deposited synthetic benchmark others can reuse.
 
 | # | Item | Status | Source |
 |---|---|---|---|
-| Fig 1 | nf-core/smrnaseq deconstruction (Plan A/B schematic) | **SOURCE LOST** — original PNG/PDF were in the now-deleted hub repo; regenerate or supply from backup | `docs/schematics/README.md` |
+| Fig 1 | nf-core/smrnaseq deconstruction vs. DREAM route | **have (remake)** — regenerated as `fig1_pipeline_overview.svg`; original PNG/PDF lost with the deleted hub repo | `docs/schematics/` |
 | Fig 2 | Known-miRNA recall/precision + quantification scatter | NEEDS BENCHMARK | `benchmarking/results/` |
 | Fig 3 | Cross-kingdom (animal vs plant) comparison | NEEDS BENCHMARK | `benchmarking/results/` |
 | Fig 4 | Cross-engine concordance on real OSDR/SRR data | NEEDS BENCHMARK | `benchmarking/results/concordance_heatmap.png` |
@@ -140,7 +140,7 @@ recommendation and an openly-deposited synthetic benchmark others can reuse.
 
 - [ ] Run `benchmarking/` for real on all four engines → fills every **[NEEDS BENCHMARK]**.
 - [ ] Verify the `CONFIRM:` parser lines against one real run of each engine.
-- [ ] Fig 1: original Plan A/B schematics were lost with the deleted hub repo — regenerate as new diagrams or supply from a backup (see `docs/schematics/README.md`).
+- [x] Fig 1: regenerated as a remake (`docs/schematics/fig1_pipeline_overview.svg`). Originals lost with the deleted hub repo; swap back in if a backup surfaces.
 - [ ] Finalise Table 1 citations (full author lists, years, DOIs).
 - [ ] List the OSDR spaceflight accessions used (Table 2).
 - [ ] Deposit synthetic data to Zenodo; insert the DOI.
