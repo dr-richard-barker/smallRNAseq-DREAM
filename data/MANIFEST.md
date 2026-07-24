@@ -21,7 +21,8 @@ have been **assembled into a Zenodo-ready bundle** (rescued from
 
 > **Bundle location (not in git):** `../../smallRNAseq-DREAM-zenodo/`
 > — 7 files, ~10 MB, with `MANIFEST.tsv`, `CHECKSUMS.sha256`, `.zenodo.json` and
-> `LICENSE_NOTES.md`. Upload that folder to Zenodo to mint the DOI.
+> `LICENSE_NOTES.md`. See that folder's `UPLOAD_INSTRUCTIONS.md` (web UI + scripted API
+> route via `zenodo_upload.py`) to deposit it and mint the DOI.
 
 | Item | File(s) | In bundle |
 |---|---|---|
