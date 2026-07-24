@@ -162,7 +162,22 @@
   </div>
   <p>This positions the framework two ways: <b>validate now</b> on real animal OSDR small RNA-seq, and stand
   <b>ready to fill the plant gap</b> the moment plant spaceflight small RNA-seq is deposited (VEGGIE/APH-type
-  missions, or new datasets). For meta-analysis, multiple animal studies across missions can be integrated today.</p>
+  missions, or new datasets).</p>
+
+  <div class="grid">
+    <div class="card"><h3>Meta-analysis cohort <span class="badge done">wired</span></h3>
+      <p>A verified spaceflight/radiation miRNA cohort — <b>OSD-334/335/336/337</b> (mouse, HZE radiation)
+      and <b>OSD-483</b> (astronaut sEV) — is pulled, processed, and merged into one count matrix.
+      Homologous miRNAs pool <b>across species</b> by family (<code>mmu-miR-21</code> + <code>hsa-miR-21</code> →
+      <code>miR-21</code>).</p></div>
+    <div class="card"><h3>Plant, from RNA-seq <span class="badge pending">precursor-level</span></h3>
+      <p>No plant small RNA-seq exists, so the plant route recovers <b>MIR-locus / precursor</b> signal from
+      standard Arabidopsis RNA-seq (plant pri-miRNAs are polyadenylated). A read-length diagnostic shows
+      empirically whether any mature ~21&nbsp;nt reads survived the prep — mature vs precursor are kept as
+      distinct measurement layers, never pooled naively.</p></div>
+  </div>
+  <p class="note">Batch correction and layer stratification are the analyst's job — the scaffold flags both
+  rather than hiding them.</p>
 </section>
 
 <section>
@@ -185,7 +200,9 @@
   <ul class="clean">
     <li><b>Code</b> — <a href="https://github.com/dr-richard-barker/smallRNAseq-DREAM">github.com/dr-richard-barker/smallRNAseq-DREAM</a> <span class="badge done">live</span></li>
     <li><b>Reference &amp; test data</b> — Zenodo deposit prepared (checksums + metadata) <span class="badge pending">DOI pending</span></li>
-    <li><b>OSDR fetch tool</b> — <code>osdr/osdr_fetch.py</code> <span class="badge done">working</span></li>
+    <li><b>OSDR fetch tool</b> — <code>osdr/osdr_fetch.py</code> + end-to-end demo <span class="badge done">working</span></li>
+    <li><b>Cross-species meta-analysis</b> — <code>meta-analysis/</code> combined count matrix <span class="badge done">wired</span></li>
+    <li><b>Plant-from-RNA-seq route</b> — <code>smallrna_from_rnaseq/</code> precursor quantification <span class="badge done">wired</span></li>
     <li><b>Manuscript</b> — outline drafted; methods/benchmark in progress <span class="badge pending">in prep</span></li>
   </ul>
 </section>
