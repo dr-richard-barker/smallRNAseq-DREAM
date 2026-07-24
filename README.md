@@ -2,6 +2,8 @@
 
 **A FAIR, cross-species small RNA-seq (miRNA) analysis framework for spaceflight omics.**
 
+🌐 **Project site:** https://dr-richard-barker.github.io/smallRNAseq-DREAM/
+
 This repository consolidates work previously split across five repositories into a
 single pipeline framework. It benchmarks four small RNA-seq analysis engines against
 one another and recommends a single cross-species route for reanalysing NASA OSDR /
