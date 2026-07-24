@@ -344,10 +344,19 @@ radiation miRNA datasets; its forward value is that it is ready to process dedic
 spaceflight small RNA-seq the moment such data are deposited — turning the gap identified here
 into a concrete target for the community.
 
-## 5. Conclusions
+## 5. Conclusions *(draft prose)*
 
-A reproducible, FAIR, cross-species small RNA-seq framework with an evidence-based pipeline
-recommendation and an openly-deposited synthetic benchmark others can reuse.
+smallRNAseq-DREAM consolidates five overlapping efforts into a single, FAIR, containerised
+framework for cross-species small RNA-seq analysis. It deconstructs the nf-core/smrnaseq
+pipeline, benchmarks four engines against synthetic data with absolute ground truth, and — on
+that evidence [NEEDS BENCHMARK] — recommends the route SRA → mirnaQC → sRNAbench → sRNAde →
+mirNOVO for reanalysis across kingdoms. Applied to NASA OSDR, it integrates the available
+animal spaceflight and radiation miRNA datasets into a cross-study, layer-aware meta-analysis
+and recovers precursor-level miRNA signal from existing plant RNA-seq, while documenting that
+dedicated plant spaceflight small RNA-seq is still absent. With its code, a reusable synthetic
+benchmark and deposited reference data openly available, the framework is reproducible on
+animal spaceflight data today and positioned to process plant spaceflight small RNA-seq as soon
+as it is generated.
 
 ---
 
