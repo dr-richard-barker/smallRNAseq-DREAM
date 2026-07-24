@@ -15,13 +15,19 @@ to get it, and (for the fixed test set) where the archived copy will live.
 
 ## Fixed benchmark set → Zenodo / GitHub Release
 
-The synthetic reads and any curated/derived FASTAs that made the accuracy test
-reproducible should be deposited once and referenced by DOI:
+The synthetic reads and curated/derived FASTAs that made the accuracy test reproducible
+have been **assembled into a Zenodo-ready bundle** (rescued from
+`mirDeep2_accuracy_synthetic_microRNA` @ `51e15be` before archiving):
 
-| Item | Previously in git as | New home |
+> **Bundle location (not in git):** `../../smallRNAseq-DREAM-zenodo/`
+> — 7 files, ~10 MB, with `MANIFEST.tsv`, `CHECKSUMS.sha256`, `.zenodo.json` and
+> `LICENSE_NOTES.md`. Upload that folder to Zenodo to mint the DOI.
+
+| Item | File(s) | In bundle |
 |---|---|---|
-| Synthetic / trimmed reads | `SRR950892_trimmed.fq.gz` (~3.8 MB) | Zenodo record — **TODO: add DOI** |
-| Curated miRBase subsets | `mature_ut*.fa`, `hairpin_ut*.fasta` (~5 MB) | Zenodo record — **TODO: add DOI** |
+| Trimmed reads (SRR950892, 228,549 reads) | `SRR950892_trimmed.fq.gz` (3.8 MB) | `reads/` |
+| miRBase mature, all species, U→T | `mature_ut.fa` (48,885 seqs) | `reference/` |
+| miRBase human / non-human / hairpin subsets | `mature*_hsa*`, `mature*No-HSA*`, `hairpin_ut*` | `reference/` |
 
 Once deposited, add:
 
