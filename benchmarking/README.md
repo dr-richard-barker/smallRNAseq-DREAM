@@ -62,9 +62,15 @@ Plots: `quantification_<engine>.png`, `recovery_bar.png`, `concordance_heatmap.p
 - **`mature`** (default, self-contained) — reads drawn from mature sequences. Solid for
   known recovery + quantification; novel scores are *conservative* because there's no
   genomic hairpin for the folding-based predictors.
-- **`genome`** (needs `genome.fa` + miRBase GFF3) — reads drawn from precursor loci, so
-  held-out miRNAs can be rediscovered from hairpin structure. Use this for the rigorous
-  novel-prediction test that goes in the paper.
+- **`genome`** (self-contained — needs only a miRBase **hairpin** FASTA, `hairpin_fa`) — each
+  simulated miRNA is linked to its precursor (hairpin) by substring match, and a
+  `precursor_genome.fa` is emitted containing the precursors of **all** simulated miRNAs,
+  including the held-out novels. Map reads against `precursor_genome.fa`: held-out novels are
+  present there (rediscoverable from hairpin structure) but absent from `reference_mature.fa`.
+  This is the rigorous novel-prediction test for the paper, and needs no multi-GB genome
+  download. (A real `genome.fa` + miRBase GFF3 is used instead only if `hairpin_fa` is absent.)
+  Verified end-to-end on real human miRBase data: 0/30 novels leaked into the reference,
+  30/30 present in the precursor genome.
 
 ## Status
 

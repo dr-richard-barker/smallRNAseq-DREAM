@@ -131,6 +131,27 @@ def gather_genome_loci(genome_fa, gff3, species_prefix):
     return loci
 
 
+def build_precursor_map(mature, hairpin_fa, species_prefix, wanted_ids):
+    """Self-contained genome-anchored mode. Map each mature id to a precursor (hairpin) that
+    contains it, by substring match — miRBase mature sequences are substrings of their
+    hairpin. Returns {mature_id: (hairpin_id, hairpin_dna)}. No genome/GFF3 download needed."""
+    hairpins = []
+    for rec in SeqIO.parse(hairpin_fa, "fasta"):
+        if species_prefix and not rec.id.lower().startswith(species_prefix.lower()):
+            continue
+        hairpins.append((rec.id, u2t(rec.seq)))
+    if not hairpins:
+        sys.exit(f"No hairpins with prefix '{species_prefix}' in {hairpin_fa}")
+    pmap = {}
+    for mid in wanted_ids:
+        mseq = mature[mid]
+        for hid, hseq in hairpins:
+            if mseq in hseq:
+                pmap[mid] = (hid, hseq)
+                break
+    return pmap
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--config", default="config.yaml")
@@ -145,9 +166,33 @@ def main():
     mature = load_mature(s["mature_fa"], s["species_prefix"])
     ids = list(mature)
     rng.shuffle(ids)
+
+    # genome-anchored mode: restrict to miRNAs whose precursor (hairpin) is available, and
+    # record the precursor for each, so held-out novels can be rediscovered from hairpin
+    # structure. Reads are still mature-length (a real small RNA-seq read is the mature);
+    # the difference from `mature` mode is that a precursor "genome" is emitted for the
+    # engines to map against (step 6).
+    precursor = {}
+    if s["mode"] == "genome":
+        if s.get("hairpin_fa"):
+            precursor = build_precursor_map(mature, s["hairpin_fa"], s["species_prefix"], ids)
+        elif s.get("genome_fa") and s.get("mirbase_gff3"):
+            loci = list(gather_genome_loci(s["genome_fa"], s["mirbase_gff3"],
+                                           s["species_prefix"]).items())
+            for mid in ids:
+                for pid, pseq in loci:
+                    if mature[mid] in pseq:
+                        precursor[mid] = (pid, pseq)
+                        break
+        else:
+            sys.exit("genome mode needs hairpin_fa (or genome_fa + mirbase_gff3) in config.")
+        ids = [i for i in ids if i in precursor]
+        if not ids:
+            sys.exit("No miRNAs linked to a precursor for genome-anchored mode.")
+
     n_known, n_novel = s["n_known"], s["n_novel"]
     if len(ids) < n_known + n_novel:
-        sys.exit(f"Only {len(ids)} miRNAs available; need n_known+n_novel={n_known+n_novel}")
+        sys.exit(f"Only {len(ids)} usable miRNAs; need n_known+n_novel={n_known+n_novel}")
     known_ids = ids[:n_known]
     novel_ids = ids[n_known:n_known + n_novel]
 
@@ -155,16 +200,6 @@ def main():
     mirna_depth = int(s["depth_total"] * (1 - s["decoy_fraction"]))
     abundances = assign_abundances(known_ids + novel_ids, mirna_depth,
                                    s["abundance_lognorm_sigma"], rng)
-
-    # 3. Source sequence for read simulation -------------------------------------------
-    if s["mode"] == "genome":
-        loci = gather_genome_loci(s["genome_fa"], s["mirbase_gff3"], s["species_prefix"])
-        # reads span the precursor around the mature; fall back to mature if no locus
-        def source_seq(mid):
-            return loci.get(mid, mature[mid])
-    else:
-        def source_seq(mid):
-            return mature[mid]
 
     # 4. Simulate reads -----------------------------------------------------------------
     reads = []
@@ -202,6 +237,19 @@ def main():
         for mid in novel_ids:
             fh.write(f"{mid}\t{mature[mid]}\t{abundances[mid]}\tnovel\n")
 
+    # genome-anchored mode: the "genome" the engines map against — precursor loci for all
+    # simulated miRNAs (known AND held-out novel), deduplicated. Novels are present here so
+    # folding-based predictors can rediscover them; the known reference above omits them.
+    if s["mode"] == "genome":
+        seen = set()
+        with open(os.path.join(out, "precursor_genome.fa"), "w") as fh:
+            for mid in known_ids + novel_ids:
+                pid, pseq = precursor[mid]
+                if pid in seen:
+                    continue
+                seen.add(pid)
+                fh.write(f">{pid}\n{pseq}\n")
+
     print(f"Wrote {len(reads):,} reads to {out}/synthetic_reads.fastq.gz")
     print(f"  known miRNAs (in reference): {len(known_ids)}")
     print(f"  novel miRNAs (held out):     {len(novel_ids)}")
@@ -209,6 +257,10 @@ def main():
     if s["mode"] == "mature":
         print("  NOTE: novel-prediction scores are conservative in 'mature' mode "
               "(no genomic hairpin context). Use mode: genome for the rigorous novel test.")
+    else:
+        n_contigs = len({precursor[m][0] for m in known_ids + novel_ids})
+        print(f"  precursor_genome.fa: {n_contigs} precursor contigs "
+              f"(map reads against this so held-out novels are discoverable)")
 
 
 if __name__ == "__main__":

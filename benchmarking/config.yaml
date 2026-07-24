@@ -7,10 +7,13 @@ seed: 42
 # Synthetic dataset generation (make_synthetic.py)
 # ---------------------------------------------------------------------------
 synthetic:
-  mode: mature            # "mature" (self-contained) or "genome" (needs genome + GFF3)
+  mode: mature            # "mature" (self-contained) or "genome" (rigorous novel test)
   species_prefix: hsa     # miRBase prefix to draw from (hsa, ath, mmu, ...)
   mature_fa: refs/mature.fa          # miRBase mature.fa (download; see data/MANIFEST.md)
-  # genome mode only:
+  # genome mode: EITHER a miRBase hairpin FASTA (self-contained, recommended — builds a
+  # precursor "genome" so held-out novels are discoverable by folding, no genome download)...
+  hairpin_fa: refs/hairpin.fa        # miRBase hairpin.fa for the species
+  # ...OR a real genome + miRBase GFF3 (used only if hairpin_fa is absent):
   genome_fa: refs/genome.fa          # reference genome (whitespace-stripped headers)
   mirbase_gff3: refs/species.gff3    # miRBase GFF3 with precursor + mature coordinates
 
