@@ -73,6 +73,21 @@ per-engine parsers target each tool's documented output layout; lines marked `CO
 `parse_outputs.py` should be checked against one real run of each engine, since exact
 filenames/columns vary with tool version and miRBase release.
 
+### Validation on real data (2026-07)
+
+The pipeline was additionally run on a **real** synthetic dataset — 1,000,000 reads simulated
+from human miRBase mature sequences (`species_prefix: hsa`, 150 known + 30 held-out novel
+miRNAs, seed 42) — to confirm the full synth → detect → score → figure flow works outside the
+mock fixtures. A naive adapter-trim + seed-match quantifier was used as a **baseline only**
+(recovering known miRNAs at recall/precision ≈ 1.0 and quantification Spearman ≈ 1.0, and — by
+design, having no hairpin model — novel recall = 0).
+
+> **The baseline is NOT one of the four engines and its numbers must not appear in the
+> manuscript as engine results.** It exists solely to validate the harness. The actual
+> four-engine benchmark (nf-core/smrnaseq, sRNAtoolbox, miRDeep2, miRDeep-P2) requires the
+> bioinformatics toolchain (`environment.yml`) and must be run on compute; that produces
+> `results/metrics_summary.tsv` → Table 3 and Figs 2/3.
+
 ## Truth / real data
 
 - Public SRR runs for concordance: **SRR950892, SRR950893, SRR950894, SRR950895**.
