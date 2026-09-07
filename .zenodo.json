@@ -1,0 +1,43 @@
+{
+  "title": "smallRNAseq-DREAM: Comprehensive microRNA and Non-Coding RNA Audit across NASA Open Science Data Repository (OSDR) Plant Spaceflight Datasets",
+  "description": "This repository provides a reproducible computational framework and dataset audit for microRNAs (miRNAs) and non-coding RNAs (ncRNAs) in plant spaceflight biological data from the NASA Open Science Data Repository (OSDR). The analysis integrates dedicated small RNA-Seq (OSD-437) with 11 bulk RNA-Seq spaceflight experiments across Arabidopsis thaliana, Solanum lycopersicum, and Brachypodium distachyon, constructing miRNA-mRNA inverse regulatory target networks and assessing cellular pathway enrichment in response to microgravity, space radiation, and spaceflight hardware environments.",
+  "creators": [
+    {
+      "name": "Barker, Richard",
+      "affiliation": "University of Wisconsin-Madison / NASA GeneLab Plant Scientific Working Group"
+    },
+    {
+      "name": "Antigravity AI Research Team",
+      "affiliation": "Google DeepMind"
+    }
+  ],
+  "access_right": "open",
+  "license": "MIT",
+  "upload_type": "publication",
+  "publication_type": "article",
+  "keywords": [
+    "microRNA",
+    "small RNA-seq",
+    "non-coding RNA",
+    "NASA OSDR",
+    "GeneLab",
+    "Spaceflight",
+    "Arabidopsis thaliana",
+    "Plant Biology",
+    "Microgravity",
+    "Gene Regulatory Network",
+    "Pathway Enrichment"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/dr-richard-barker/smallRNAseq-DREAM",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-437",
+      "relation": "references",
+      "scheme": "url"
+    }
+  ]
+}

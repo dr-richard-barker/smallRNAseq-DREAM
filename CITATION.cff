@@ -1,16 +1,26 @@
 cff-version: 1.2.0
-message: "If you use this framework, please cite it and the underlying tools."
-title: "smallRNAseq-DREAM: a FAIR cross-species small RNA-seq analysis framework for spaceflight omics"
+message: "If you use this software, pipeline, or dataset in your research, please cite it as below."
+title: "smallRNAseq-DREAM: NASA OSDR Plant Spaceflight microRNA and Non-Coding RNA Audit Framework"
 authors:
-  - family-names: Barker
-    given-names: Richard John
-    # orcid: "https://orcid.org/XXXX-XXXX-XXXX-XXXX"   # TODO
+  - family-names: "Barker"
+    given-names: "Richard John"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+    affiliation: "University of Wisconsin-Madison / NASA GeneLab Scientific Working Group"
 type: software
-repository-code: "https://github.com/dr-richard-barker/smallRNAseq-DREAM"   # TODO: confirm name
-license: MIT   # TODO: confirm — see NOTICE.md
-# version:      # TODO
-# date-released:  # TODO
-# doi:          # TODO: add Zenodo DOI after first release
+version: 1.0.0
+date-released: 2026-09-06
+url: "https://github.com/dr-richard-barker/smallRNAseq-DREAM"
+repository-code: "https://github.com/dr-richard-barker/smallRNAseq-DREAM"
+keywords:
+  - microRNA
+  - small RNA-seq
+  - non-coding RNA
+  - spaceflight
+  - NASA OSDR
+  - Arabidopsis thaliana
+  - transcriptomics
+  - gene regulatory network
+license: MIT
 references:
   - type: article
     authors:

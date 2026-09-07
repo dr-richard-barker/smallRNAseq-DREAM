@@ -1,0 +1,6 @@
+Pathway,Key_miRNAs,Key_Targets,Total_Pairs,Significant_Pairs,Fisher_PValue,Enrichment_Score,Physiological_Role
+Phase Change & Vegetative Development,"miR156, miR172","AP2, SPL10, SPL13, SPL2, SPL3, SPL9, TOE1",35,19,2.4148432338297423e-08,7.617111057414553,"Squamosa promoter binding protein-like 2, root & shoot morphogenesis"
+Auxin Signaling & Root Gravitropism,"miR160, miR164, miR393","AFB1, AFB2, ARF10, ARF16, ARF17, CUC1, CUC2, NAC1, TIR1",40,16,4.6455129707866445e-05,4.332966322987553,"Auxin Response Factor 10, root cap cell fate and seed germination"
+Reactive Oxygen Species (ROS) & Oxidative Stress Defense,miR398,"CCS1, CSD1, CSD2",15,7,0.0023981671881295324,2.620120543359324,"Cytosolic Cu/Zn superoxide dismutase 1, oxidative stress defense"
+Vascular Patterning & Cell Wall Remodeling,miR166,"ATHB8, PHB, PHV, REV",20,5,0.13739779571183203,0.8620202346554127,"PHABULOSA HD-ZIP III TF, vascular polarity and SAM development"
+Small RNA Silencing Machinery Regulation,miR168,AGO1,5,2,0.1466515947662764,0.8337132099120147,"ARGONAUTE 1, catalytic core of RISC complex and sRNA silencing"

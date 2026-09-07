@@ -28,9 +28,23 @@ work/
 *.log
 report.log
 
-# Environments / caches
+# Python / Environments / Caches
 env/
 .venv/
 __pycache__/
 *.pyc
 .DS_Store
+
+# IDE / OS
+.idea/
+.vscode/
+
+# Other non-smallRNAseq-DREAM project files in workspace
+Lunar_Regolith_BLSS_Review.docx
+lunar_blss_sintered_regolith_interactive_explorer.html
+lunar-regolith-blss-review/
+Ordering_forms_for_Porterfield_Lab/
+AIRI/
+
+# Ignore large downloaded raw OSDR count matrices (automatically re-downloaded via osdr_api_client.py)
+data/OSD-*/
