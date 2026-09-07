@@ -1,0 +1,50 @@
+# Large bioinformatics data — keep these OUT of git (see data/MANIFEST.md)
+*.fa
+*.fasta
+*.fna
+*.fq
+*.fastq
+*.fq.gz
+*.fastq.gz
+*.sra
+*.bam
+*.sam
+*.arf
+*.ebwt
+*.bt2
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# But keep small example / manifest files if you add them deliberately:
+!examples/*.csv
+
+# miRDeep2 / pipeline run outputs
+result/
+results/
+work/
+.nextflow*
+*.log
+report.log
+
+# Python / Environments / Caches
+env/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# IDE / OS
+.idea/
+.vscode/
+
+# Other non-smallRNAseq-DREAM project files in workspace
+Lunar_Regolith_BLSS_Review.docx
+lunar_blss_sintered_regolith_interactive_explorer.html
+lunar-regolith-blss-review/
+Ordering_forms_for_Porterfield_Lab/
+AIRI/
+
+# Ignore large downloaded raw OSDR count matrices (automatically re-downloaded via osdr_api_client.py)
+data/OSD-*/
