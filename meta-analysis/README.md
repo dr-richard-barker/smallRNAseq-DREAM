@@ -12,7 +12,8 @@ Verified against the live OSDR API (raw FASTQ present):
 |---|---|---|---|---|
 | OSD-334/335/336/337 | *Mus musculus* | mature | HZE radiation | ~78–80 each |
 | OSD-483 | *Homo sapiens* | mature | Spaceflight (STS), astronaut sEV | 42 |
-| OSD-208, OSD-437 | *Arabidopsis thaliana* | **precursor** | Spaceflight / microgravity | — (see below) |
+| OSD-208 | *Arabidopsis thaliana* | **precursor** | Ground study: root Zone 1 vs Zone 2 | — (see below) |
+| OSD-437 | *Arabidopsis thaliana* | **precursor** | Spaceflight (EMCS): 1g centrifuge vs microgravity at 4 and 6 days, plus 6-day ground control | — (see below) |
 
 The mouse + human studies are genuine small RNA-seq (mature miRNA). The Arabidopsis studies
 are **standard RNA-seq, not small RNA-seq** — handled by the precursor-level route in

@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-miRNA-mRNA Target Regulatory Network & Empirical Functional Pathway Enrichment Analysis
+miRNA-target pairing over GeneLab DE tables, plus an ILLUSTRATIVE per-pathway Fisher test.
+See the README status note: the miRNA-side values come from mislabelled loci and the
+log2FC columns are each table's first contrast, so these outputs are not interpretable yet.
 """
 
 import os
@@ -12,7 +14,8 @@ from scipy.stats import fisher_exact
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
-# Validated & Predicted Plant microRNA Target Interaction Database (miRBase / TargetFinder / psRNATarget)
+# Hand-curated, well-known plant miRNA -> target pairs, typed from the literature.
+# No target database (miRBase / TargetFinder / psRNATarget) was queried. TODO: cite a source per pair.
 PLANT_MIRNA_TARGETS = [
     # miR156 family -> SPL transcription factors (Development, Gravitropism, Flowering)
     {'miRNA': 'miR156', 'miRNA_Gene': 'MIR156a/b/c/d/e/f', 'Target_Gene_ID': 'AT1G27370', 'Target_Symbol': 'SPL2',  'Pathway': 'Phase Change & Vegetative Development', 'Function': 'Squamosa promoter binding protein-like 2, root & shoot morphogenesis'},
@@ -77,6 +80,7 @@ def build_regulatory_network():
                 p_cols = [c for c in df_de.columns if 'pvalue' in c.lower() or 'p.value' in c.lower() or 'padj' in c.lower()]
                 
                 if lfc_cols:
+                    # NOTE: first contrast in the table, not flight vs ground (TODO: select by name).
                     lfc_col = lfc_cols[0]
                     pval_col = p_cols[0] if p_cols else None
                     
@@ -117,7 +121,8 @@ def build_regulatory_network():
     df_net.to_csv(out_csv, index=False)
     print(f"Exported regulatory network to {out_csv}", flush=True)
     
-    # Calculate Empirical Pathway Enrichment using Fisher Exact Test
+    # ILLUSTRATIVE Fisher test, not an enrichment result: the background below is typed,
+    # not measured, and each target is counted once per study (7 targets x 5 studies = 35).
     pathway_groups = df_net.groupby('Pathway')
     pathway_records = []
     
@@ -156,7 +161,7 @@ def build_regulatory_network():
     df_path = pd.DataFrame(pathway_records).sort_values('Enrichment_Score', ascending=False)
     path_csv = os.path.join(os.path.dirname(__file__), "target_gene_pathway_enrichment.csv")
     df_path.to_csv(path_csv, index=False)
-    print(f"Exported empirical pathway enrichment summary to {path_csv}", flush=True)
+    print(f"Exported illustrative pathway Fisher-test table to {path_csv}", flush=True)
     
     return df_net, df_path
 

@@ -47,10 +47,10 @@ def main():
     run_step("osdr_api_client.py", "1. NASA OSDR API Plant Dataset Mining & Asset Extraction")
     
     # 2. ncRNA Quantification
-    run_step("ncrna_quantifier.py", "2. Small RNA & microRNA Spaceflight Abundance Profiling")
+    run_step("ncrna_quantifier.py", "2. Map-labelled locus extraction from GeneLab DE tables (see README status)")
     
     # 3. miRNA Target Network & Pathway Enrichment
-    run_step("mirna_target_network.py", "3. miRNA-mRNA Target Inverse Regulatory Network & Pathway Enrichment")
+    run_step("mirna_target_network.py", "3. Curated miRNA-target pairing & illustrative Fisher test")
     
     # 4. Figure Rendering
     run_step("build_dream_manuscript_figures.py", "4. Publication & Advanced Visualization Figure Generation (Figures 1-7)")
@@ -65,11 +65,11 @@ def main():
     print("Generated figures in figures/:")
     print("  - Figure 1: NASA OSDR Plant Dataset Landscape & Assay Modality Stacked Bar")
     print("  - Figure 2: microRNA Differential Expression & Volcano Plot")
-    print("  - Figure 3: miRNA-mRNA Anti-Correlated Regulatory Target Coupling Network")
-    print("  - Figure 4: Fisher Exact Test Functional Pathway Enrichment")
-    print("  - Figure 5: miRNA -> Target Gene -> Ontology Sankey Flow Diagram")
+    print("  - Figure 3: miRNA-target log2FC sign comparison (curated pairs)")
+    print("  - Figure 4: Illustrative Fisher test (typed background)")
+    print("  - Figure 5: Schematic miRNA -> target -> process diagram (no data)")
     print("  - Figure 6: Multimodal Genetic Feature & Abundance Knowledge Graph")
-    print("  - Figure 7: Spatial Pathway-Level RNA Abundance Coupling Map")
+    print("  - Figure 7: Schematic pathway map with table means")
     print("================================================================================")
 
 if __name__ == "__main__":

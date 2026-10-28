@@ -17,7 +17,8 @@ a proxy for miRNA *gene activity* — not mature miRNA abundance. The library pr
 the constraint:
 
 - **OSD-437** — NEBNext Ultra II RNA (standard mRNA-seq; rRNA only measured, not depleted).
-- **OSD-208** — Ovation Pico WTA + Nextera, total-RNA input.
+- **OSD-208** — ground study (root Zone 1 vs Zone 2); SMART-Seq v4 Ultra Low Input + Nextera,
+  ISA library selection "polyA enrichment". (Ovation Pico WTA was this study's microarray labelling kit.)
 
 Poly-A selection + fragmentation + size selection all bias against the mature ~21 nt product,
 while retaining the polyadenylated precursor. The read-length diagnostic (`step 2`) lets you

@@ -11,7 +11,12 @@ import numpy as np
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
-# Known Arabidopsis microRNA Families & Loci (miRBase / Araport11)
+# WARNING (abai check 2026-10-28): this hand-typed map was NOT taken from miRBase or Araport11.
+# Of the 29 IDs that reach mirna_spaceflight_profiles.csv, only 3 are the named MIR gene
+# (AT2G46685 MIR166a, AT5G14545 MIR398b, AT5G14565 MIR398c); 16 are protein-coding (e.g.
+# AT1G53160 = SPL4, labelled MIR156b), 2 lncRNA, 1 snoRNA and 7 a different MIR gene
+# (Ensembl Plants REST lookup). The outputs are therefore not miRNA measurements.
+# TODO: rebuild this map from Ensembl Plants genes with biotype=miRNA.
 MIRNA_LOCI_MAP = {
     'AT1G48190': 'MIR156a', 'AT1G53160': 'MIR156b', 'AT2G24950': 'MIR156c', 'AT5G10940': 'MIR156d',
     'AT5G10950': 'MIR156e', 'AT5G10960': 'MIR156f', 'AT2G47540': 'MIR165a', 'AT4G00885': 'MIR165b',
@@ -30,7 +35,9 @@ MIRNA_LOCI_MAP = {
 }
 
 def analyze_srna_seq_osd437():
-    print("=== Analyzing OSD-437 Dedicated Small RNA-seq Dataset ===", flush=True)
+    # OSD-437 is standard poly(A) RNA-seq (NEBNext Ultra II RNA; ISA library selection
+    # 'polyA enrichment'), not small RNA-seq. The function name is kept for compatibility.
+    print("=== Extracting map-labelled loci from OSD-437 (poly(A) RNA-seq DE table) ===", flush=True)
     osd437_dir = os.path.join(DATA_DIR, "OSD-437")
     de_file = os.path.join(osd437_dir, "OSD-437_differential_expression.csv")
     counts_file = os.path.join(osd437_dir, "OSD-437_raw_counts.csv")
@@ -52,7 +59,9 @@ def analyze_srna_seq_osd437():
             
             is_mir = bool(gene_name) or 'MIR' in gene_id or 'MIRNA' in gene_id
             if is_mir:
-                # Find log2FC and PValue columns
+                # Find log2FC and PValue columns.
+                # NOTE: [0] is the first contrast in the GeneLab table, which is not flight vs ground
+                # (for OSD-437 it is 1G-centrifuge vs uG, both in flight). TODO: select by name.
                 log2fc_cols = [c for c in df_de.columns if 'log2' in c.lower() or 'foldchange' in c.lower()]
                 p_cols = [c for c in df_de.columns if 'pvalue' in c.lower() or 'p.value' in c.lower() or 'padj' in c.lower()]
                 
@@ -61,7 +70,7 @@ def analyze_srna_seq_osd437():
                 
                 records.append({
                     'Study': 'OSD-437',
-                    'Assay': 'sRNA-seq',
+                    'Assay': 'RNA-seq (polyA)',
                     'Gene_ID': gene_id,
                     'miRNA_Name': gene_name or gene_id,
                     'log2FC': float(log2fc_val) if pd.notnull(log2fc_val) else 0.0,
@@ -79,7 +88,8 @@ def analyze_srna_seq_osd437():
             gene_id = str(row[gene_col]).strip().upper()
             gene_name = MIRNA_LOCI_MAP.get(gene_id, None)
             if gene_name:
-                # Calculate mean spaceflight vs ground control VST
+                # Fallback (not reached for the current outputs: every OSD-437 row comes from the DE table).
+                # NOTE: the keyword match and the half-split default below do not identify flight vs ground.
                 flight_cols = [c for c in df_vst.columns if any(k in c.lower() for k in ['flight', 'flt', 'f_', 'space'])]
                 ground_cols = [c for c in df_vst.columns if any(k in c.lower() for k in ['ground', 'gc', 'g_', '1g', 'control'])]
                 
@@ -97,7 +107,7 @@ def analyze_srna_seq_osd437():
                 if not any(r['Gene_ID'] == gene_id for r in records):
                     records.append({
                         'Study': 'OSD-437',
-                        'Assay': 'sRNA-seq',
+                        'Assay': 'RNA-seq (polyA)',
                         'Gene_ID': gene_id,
                         'miRNA_Name': gene_name,
                         'log2FC': float(diff_vst),
@@ -107,7 +117,7 @@ def analyze_srna_seq_osd437():
                     })
 
     df_res = pd.DataFrame(records)
-    print(f"Identified {len(df_res)} microRNA loci in OSD-437 small RNA-seq data.", flush=True)
+    print(f"Extracted {len(df_res)} map-labelled rows from the OSD-437 RNA-seq DE table.", flush=True)
     return df_res
 
 def audit_bulk_rnaseq_ncrna():
@@ -129,6 +139,7 @@ def audit_bulk_rnaseq_ncrna():
                 p_cols = [c for c in df_de.columns if 'pvalue' in c.lower() or 'p.value' in c.lower() or 'padj' in c.lower()]
                 
                 if log2fc_cols:
+                    # NOTE: first contrast in the table, not flight vs ground (TODO: select by name).
                     lfc_col = log2fc_cols[0]
                     pval_col = p_cols[0] if p_cols else None
                     
@@ -168,7 +179,7 @@ def run_ncrna_audit():
     output_csv = os.path.join(os.path.dirname(__file__), "mirna_spaceflight_profiles.csv")
     df_combined.to_csv(output_csv, index=False)
     
-    print(f"\nMicroRNA Audit Complete. Exported {len(df_combined)} miRNA profiles to {output_csv}", flush=True)
+    print(f"\nExported {len(df_combined)} map-labelled rows to {output_csv} (not miRNA measurements; see README status)", flush=True)
     return df_combined
 
 if __name__ == "__main__":

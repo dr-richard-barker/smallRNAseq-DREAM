@@ -17,19 +17,22 @@ BASE_DOWNLOAD_URL = "https://osdr.nasa.gov"
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
+# Species and assay labels are typed here. 'assay_type' is the RNA-seq assay's ISA
+# 'Library Selection' as read from each OSDR study record on 2026-10-28 (abai check);
+# OSDR holds no plant small RNA-seq, and OSD-437 is standard poly(A) RNA-seq.
 PLANT_OSD_MAP = [
-    {'id': 437, 'species': 'Arabidopsis thaliana', 'assay_type': 'Small RNA-Seq (sRNA-seq)', 'desc': 'sRNA-seq Seedling Development in Microgravity'},
-    {'id': 120, 'species': 'Arabidopsis thaliana', 'assay_type': 'Total RNA-Seq (rRNA-depleted)', 'desc': 'BRIC-19 Spaceflight Transcriptomics'},
-    {'id': 218, 'species': 'Arabidopsis thaliana', 'assay_type': 'Total RNA-Seq (rRNA-depleted)', 'desc': 'ISS Flight Root/Shoot Transcriptomics'},
-    {'id': 217, 'species': 'Arabidopsis thaliana', 'assay_type': 'Multi-Omics / WGBS RNA-Seq', 'desc': 'Extraterrestrial Epigenetics & RNA-Seq'},
-    {'id': 375, 'species': 'Brachypodium distachyon', 'assay_type': 'Poly(A)-Selected Bulk RNA-Seq', 'desc': 'ISS Brachypodium Root/Shoot Transcriptomics'},
-    {'id': 480, 'species': 'Arabidopsis thaliana', 'assay_type': 'Poly(A)-Selected Bulk RNA-Seq', 'desc': 'Plant Gravity Perception (PGP) Flight Study'},
-    {'id': 522, 'species': 'Arabidopsis thaliana', 'assay_type': 'Multi-Omics / Proteomics RNA-Seq', 'desc': 'Integrative Transcriptomics & Proteomics'},
-    {'id': 565, 'species': 'Arabidopsis thaliana', 'assay_type': 'Total RNA-Seq (rRNA-depleted)', 'desc': 'KSC Fixation Tube Spaceflight Study'},
-    {'id': 624, 'species': 'Arabidopsis thaliana', 'assay_type': 'Poly(A)-Selected Bulk RNA-Seq', 'desc': 'Virgin Galactic Suborbital Spaceflight'},
-    {'id': 767, 'species': 'Solanum lycopersicum', 'assay_type': 'Poly(A)-Selected Bulk RNA-Seq', 'desc': 'ISS Tomato Crop Transcriptomics'},
-    {'id': 782, 'species': 'Arabidopsis thaliana', 'assay_type': 'Total RNA-Seq (rRNA-depleted)', 'desc': 'Low-Dose Ionizing Radiation Response'},
-    {'id': 59,  'species': 'Brassica rapa', 'assay_type': 'Poly(A)-Selected Bulk RNA-Seq', 'desc': 'ROS Gene Network in Microgravity'}
+    {'id': 437, 'species': 'Arabidopsis thaliana', 'assay_type': 'polyA enrichment', 'desc': 'Seedling development in microgravity (poly(A) RNA-seq)'},
+    {'id': 120, 'species': 'Arabidopsis thaliana', 'assay_type': 'ribo-depletion', 'desc': 'Arabidopsis spaceflight transcriptome (SpaceX-3)'},
+    {'id': 218, 'species': 'Arabidopsis thaliana', 'assay_type': 'polyA enrichment', 'desc': 'ISS Flight Root/Shoot Transcriptomics'},
+    {'id': 217, 'species': 'Arabidopsis thaliana', 'assay_type': 'cDNA', 'desc': 'Extraterrestrial Epigenetics & RNA-Seq'},
+    {'id': 375, 'species': 'Brachypodium distachyon', 'assay_type': 'Ribo-depletion (32), cDNA (16)', 'desc': 'ISS Brachypodium Root/Shoot Transcriptomics'},
+    {'id': 480, 'species': 'Arabidopsis thaliana', 'assay_type': 'not recorded in OSDR', 'desc': 'Plant Gravity Perception (PGP) Flight Study'},
+    {'id': 522, 'species': 'Arabidopsis thaliana', 'assay_type': 'polyA enrichment', 'desc': 'Integrative Transcriptomics & Proteomics'},
+    {'id': 565, 'species': 'Arabidopsis thaliana', 'assay_type': 'cDNA', 'desc': 'KSC Fixation Tube study (OSDR project type: Ground Study)'},
+    {'id': 624, 'species': 'Arabidopsis thaliana', 'assay_type': 'polyA enrichment', 'desc': 'Virgin Galactic Suborbital Spaceflight'},
+    {'id': 767, 'species': 'Solanum lycopersicum', 'assay_type': 'polyA enrichment', 'desc': 'ISS Tomato Crop Transcriptomics'},
+    {'id': 782, 'species': 'Arabidopsis thaliana', 'assay_type': 'polyA enrichment', 'desc': 'Low-Dose Ionizing Radiation Response'},
+    {'id': 59,  'species': 'Brassica rapa', 'assay_type': 'mRNA enrichment', 'desc': 'ROS Gene Network in Microgravity'}
 ]
 
 def fetch_and_refine_inventory():

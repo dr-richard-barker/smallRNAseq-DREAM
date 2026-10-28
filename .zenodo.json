@@ -1,6 +1,6 @@
 {
-  "title": "smallRNAseq-DREAM: Comprehensive microRNA and Non-Coding RNA Audit across NASA Open Science Data Repository (OSDR) Plant Spaceflight Datasets",
-  "description": "This repository provides a reproducible computational framework and dataset audit for microRNAs (miRNAs) and non-coding RNAs (ncRNAs) in plant spaceflight biological data from the NASA Open Science Data Repository (OSDR). The analysis integrates dedicated small RNA-Seq (OSD-437) with 11 bulk RNA-Seq spaceflight experiments across Arabidopsis thaliana, Solanum lycopersicum, and Brachypodium distachyon, constructing miRNA-mRNA inverse regulatory target networks and assessing cellular pathway enrichment in response to microgravity, space radiation, and spaceflight hardware environments.",
+  "title": "smallRNAseq-DREAM: a cross-species small RNA-seq framework and NASA Open Science Data Repository (OSDR) plant RNA-seq dataset inventory",
+  "description": "Code and documentation for a cross-species small RNA-seq (miRNA) analysis framework (four analysis engines and a synthetic ground-truth benchmarking harness), NASA OSDR retrieval tools, and an inventory of 12 NASA OSDR plant RNA-seq studies (Arabidopsis thaliana, Brachypodium distachyon, Solanum lycopersicum, Brassica rapa). OSDR holds no plant small RNA-seq; OSD-437 is standard poly(A) RNA-seq. The repository also contains an exploratory scan of GeneLab differential-expression tables for miRNA-related signal whose outputs are not interpretable yet: its locus map mislabels most IDs and its log2FC columns are not flight-vs-ground contrasts (see README, Status). The four-engine benchmark has not been run.",
   "creators": [
     {
       "name": "Barker, Richard",

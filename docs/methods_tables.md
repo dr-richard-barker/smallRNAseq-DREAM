@@ -14,11 +14,11 @@ transformed into insights about miRNA function and regulation.
 
 | Tool | Inputs | Data products | Function | Plants/Animals | Reference |
 |---|---|---|---|---|---|
-| mirnaQC | FASTQ | BAM, QC reports | Pre-processing & QC for miRNA-seq | Both | Alexandrov et al. (2010) |
-| sRNAbench | FASTQ | FASTQ, BAM, count tables | miRNA annotation, DE analysis | Both | Langenberger et al. (2013) |
-| sRNAblast | FASTQ | BLAST report, alignments | miRNA target prediction | Both | Wei et al. (2014) |
-| mirNOVO | FASTQ | Novel miRNA candidates, FASTA | De novo miRNA discovery | Both | Bonnet et al. (2010) |
-| sRNAde | counts.txt, factors.txt | DE results, plots | DE analysis for small RNAs | Both | Anders et al. (2010) |
+| mirnaQC | FASTQ | BAM, QC reports | Pre-processing & QC for miRNA-seq | Both | Aparicio-Puerta et al. (2020), doi:10.1093/nar/gkaa452 |
+| sRNAbench | FASTQ | FASTQ, BAM, count tables | miRNA annotation, DE analysis | Both | Barturen et al. (2014), doi:10.2478/mngs-2014-0001 |
+| sRNAblast | FASTQ | BLAST report, alignments | miRNA target prediction | Both | Wei et al. (2014) — TODO: not verified |
+| mirNOVO | FASTQ | Novel miRNA candidates, FASTA | De novo miRNA discovery | Both | Vitsios et al. (2017), doi:10.1093/nar/gkx836 |
+| sRNAde | counts.txt, factors.txt | DE results, plots | DE analysis for small RNAs | Both | Anders et al. (2010) — TODO: not verified |
 
 ## Workflow stages
 

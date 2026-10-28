@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-Publication-Quality Manuscript Figure & Advanced Visualization Generator for smallRNAseq-DREAM (100% Empirical Data Driven)
+Figure generator for smallRNAseq-DREAM. Figures 1-4 and 6 plot the tables in the repo root;
+Figures 5 and 7 are schematics. See the README status note: the miRNA-side values are not yet
+interpretable (mislabelled loci; first deposited contrast, not flight vs ground).
 """
 
 import os
@@ -25,7 +27,7 @@ os.makedirs(FIGURES_DIR, exist_ok=True)
 # FIGURE 1: OSDR Plant Dataset Landscape & Stacked RNA-Seq Subtypes
 # ---------------------------------------------------------
 def generate_figure1_osdr_landscape():
-    print("Generating Figure 1: NASA OSDR Plant Spaceflight Dataset Landscape...", flush=True)
+    print("Generating Figure 1: NASA OSDR plant dataset inventory...", flush=True)
     inv_file = os.path.join(os.path.dirname(__file__), "plant_osdr_inventory.csv")
     if not os.path.exists(inv_file):
         print("Inventory file missing!", flush=True)
@@ -44,8 +46,8 @@ def generate_figure1_osdr_landscape():
     axes[0].set_yticks(y_pos)
     axes[0].set_yticklabels(org_counts.index, fontsize=11, fontweight='bold')
     axes[0].invert_yaxis()
-    axes[0].set_title("A. Plant Spaceflight Studies by Species", fontsize=13, fontweight='bold', pad=12)
-    axes[0].set_xlabel("Number of OSDR Spaceflight Datasets", fontsize=11)
+    axes[0].set_title("A. Indexed OSDR plant studies by species", fontsize=13, fontweight='bold', pad=12)
+    axes[0].set_xlabel("Number of OSDR studies (project types: see README inventory)", fontsize=11)
     
     for i, v in enumerate(org_counts.values):
         axes[0].text(v + 0.15, i, f"{v} datasets", va='center', fontweight='bold', fontsize=10)
@@ -54,11 +56,12 @@ def generate_figure1_osdr_landscape():
     # Panel B: Stacked Bar Plot of RNA-Seq Subtypes by Species
     ct_table = pd.crosstab(df['Organism'], df['Assay_Subtype'])
     subtype_colors = {
-        'Small RNA-Seq (sRNA-seq)': '#e41a1c',
-        'Total RNA-Seq (rRNA-depleted)': '#377eb8',
-        'Poly(A)-Selected Bulk RNA-Seq': '#4daf4a',
-        'Multi-Omics / WGBS RNA-Seq': '#984ea3',
-        'Multi-Omics / Proteomics RNA-Seq': '#ff7f00'
+        'polyA enrichment': '#4daf4a',
+        'mRNA enrichment': '#a6d854',
+        'ribo-depletion': '#377eb8',
+        'Ribo-depletion (32), cDNA (16)': '#80b1d3',
+        'cDNA': '#984ea3',
+        'not recorded in OSDR': '#bbbbbb'
     }
     
     bottom = np.zeros(len(ct_table))
@@ -68,11 +71,11 @@ def generate_figure1_osdr_landscape():
         axes[1].bar(range(len(ct_table.index)), c_val, bottom=bottom, label=col, color=color, edgecolor='black', linewidth=0.8)
         bottom += c_val
         
-    axes[1].set_title("B. RNA-Seq Assay Subtypes across Plant Species", fontsize=13, fontweight='bold', pad=12)
+    axes[1].set_title("B. RNA-seq library selection (OSDR ISA record)", fontsize=13, fontweight='bold', pad=12)
     axes[1].set_ylabel("Number of Datasets", fontsize=11)
     axes[1].set_xticks(range(len(ct_table.index)))
     axes[1].set_xticklabels(ct_table.index, rotation=15, ha='right', fontweight='bold')
-    axes[1].legend(title="Assay Subtype", loc='upper right', fontsize=9.5)
+    axes[1].legend(title="Library selection", loc='upper right', fontsize=9.5)
     
     plt.tight_layout()
     fig_path = os.path.join(FIGURES_DIR, "Figure1_OSDR_Plant_Dataset_Landscape.png")
@@ -84,7 +87,7 @@ def generate_figure1_osdr_landscape():
 # FIGURE 2: MicroRNA Differential Expression Profiles
 # ---------------------------------------------------------
 def generate_figure2_mirna_volcano_heatmap():
-    print("Generating Figure 2: MicroRNA Differential Expression Profiles...", flush=True)
+    print("Generating Figure 2: map-labelled locus log2FC (not interpretable yet)...", flush=True)
     prof_file = os.path.join(os.path.dirname(__file__), "mirna_spaceflight_profiles.csv")
     if not os.path.exists(prof_file):
         return
@@ -101,15 +104,15 @@ def generate_figure2_mirna_volcano_heatmap():
     ns_mask = ~sig_mask
     
     axes[0].scatter(df.loc[ns_mask, 'log2FC'], df.loc[ns_mask, 'nlog10_p'], color='grey', alpha=0.4, label='Not Significant')
-    axes[0].scatter(df.loc[up_mask, 'log2FC'], df.loc[up_mask, 'nlog10_p'], color='#d95f02', alpha=0.85, s=65, label='Upregulated in Spaceflight')
-    axes[0].scatter(df.loc[down_mask, 'log2FC'], df.loc[down_mask, 'nlog10_p'], color='#7570b3', alpha=0.85, s=65, label='Downregulated in Spaceflight')
+    axes[0].scatter(df.loc[up_mask, 'log2FC'], df.loc[up_mask, 'nlog10_p'], color='#d95f02', alpha=0.85, s=65, label='log2FC > 0.5, P <= 0.05')
+    axes[0].scatter(df.loc[down_mask, 'log2FC'], df.loc[down_mask, 'nlog10_p'], color='#7570b3', alpha=0.85, s=65, label='log2FC < -0.5, P <= 0.05')
     
     axes[0].axvline(0.5, color='black', linestyle='--', linewidth=0.8)
     axes[0].axvline(-0.5, color='black', linestyle='--', linewidth=0.8)
     axes[0].axhline(-np.log10(0.05), color='black', linestyle='--', linewidth=0.8)
     
-    axes[0].set_title("A. MicroRNA Expression Response to Spaceflight", fontsize=13, fontweight='bold', pad=12)
-    axes[0].set_xlabel("log2 Fold Change (Spaceflight / Control)", fontsize=11)
+    axes[0].set_title("A. Rows labelled MIR* by the typed locus map\n(most are not miRNA genes; see README TODO)", fontsize=12, fontweight='bold', pad=12)
+    axes[0].set_xlabel("log2FC, first contrast in each GeneLab table (not flight vs ground)", fontsize=10.5)
     axes[0].set_ylabel("-log10 (P-Value)", fontsize=11)
     axes[0].legend(loc='upper right')
     
@@ -120,9 +123,9 @@ def generate_figure2_mirna_volcano_heatmap():
     pivot_df = df.pivot_table(index='miRNA_Name', columns='Study', values='log2FC', aggfunc='mean').fillna(0)
     if not pivot_df.empty:
         sns.heatmap(pivot_df.head(15), cmap='vlag', center=0, annot=True, fmt='.2f', ax=axes[1], cbar_kws={'label': 'log2 Fold Change'})
-        axes[1].set_title("B. MicroRNA Expression Matrix across OSDR Studies", fontsize=13, fontweight='bold', pad=12)
-        axes[1].set_ylabel("MicroRNA Family", fontsize=11)
-        axes[1].set_xlabel("OSDR Spaceflight Dataset", fontsize=11)
+        axes[1].set_title("B. log2FC by map label and study (first 15 labels; 0.00 = no row)", fontsize=12, fontweight='bold', pad=12)
+        axes[1].set_ylabel("Label from typed locus map (3 of 29 correct)", fontsize=10.5)
+        axes[1].set_xlabel("OSDR study (first deposited contrast)", fontsize=11)
         
     plt.tight_layout()
     fig_path = os.path.join(FIGURES_DIR, "Figure2_microRNA_Differential_Expression.png")
@@ -134,7 +137,7 @@ def generate_figure2_mirna_volcano_heatmap():
 # FIGURE 3: miRNA-mRNA Regulatory Coupling Scatter
 # ---------------------------------------------------------
 def generate_figure3_regulatory_network():
-    print("Generating Figure 3: miRNA-mRNA Inverse Regulatory Pairing...", flush=True)
+    print("Generating Figure 3: curated miRNA-target log2FC sign comparison...", flush=True)
     net_file = os.path.join(os.path.dirname(__file__), "mirna_mrna_regulatory_network.csv")
     if not os.path.exists(net_file):
         return
@@ -150,22 +153,30 @@ def generate_figure3_regulatory_network():
     ax.axhline(0, color='black', linestyle='--', linewidth=0.8)
     ax.axvline(0, color='black', linestyle='--', linewidth=0.8)
     
-    ax.set_title("Figure 3. miRNA-mRNA Regulatory Fold-Change Coupling in Spaceflight", fontsize=13, fontweight='bold', pad=12)
-    ax.set_xlabel("microRNA log2 Fold Change (Spaceflight vs Ground)", fontsize=11)
-    ax.set_ylabel("Target mRNA log2 Fold Change (Spaceflight vs Ground)", fontsize=11)
+    ax.set_title("Figure 3. Curated miRNA-target pairs: sign of log2FC (not interpretable yet)", fontsize=12.5, fontweight='bold', pad=12)
+    ax.set_xlabel("'miRNA' value: mean log2FC of map-labelled rows (mostly not miRNA genes)", fontsize=10.5)
+    ax.set_ylabel("Target gene log2FC (first contrast in each GeneLab table)", fontsize=10.5)
     
-    for _, row in df[df['Regulatory_Relationship'] == 'Inverse (Repressed Target)'].head(12).iterrows():
-        label = f"{row['miRNA_Family']} -> {row['Target_Symbol']}"
-        ax.annotate(label, (row['miRNA_log2FC'], row['Target_log2FC']),
-                    xytext=(6, 6), textcoords='offset points', fontsize=9, fontweight='bold',
+    # Label only the opposite-sign pairs furthest from the origin, one label per pair name,
+    # with staggered offsets, so labels do not overlap the dense cluster near zero.
+    inv = df[df['Regulatory_Relationship'] == 'Inverse (Repressed Target)'].copy()
+    inv['dist'] = np.hypot(inv['miRNA_log2FC'], inv['Target_log2FC'])
+    inv['label'] = inv['miRNA_Family'] + ' -> ' + inv['Target_Symbol'] + ' (' + inv['Study'] + ')'
+    offsets = [(10, 10), (10, -16), (-10, 12), (-10, -18)]
+    for k, (_, row) in enumerate(inv.sort_values('dist', ascending=False).drop_duplicates('label').head(6).iterrows()):
+        dx, dy = offsets[k % len(offsets)]
+        ax.annotate(row['label'], (row['miRNA_log2FC'], row['Target_log2FC']),
+                    xytext=(dx, dy), textcoords='offset points', fontsize=8.5, fontweight='bold',
+                    ha='left' if dx > 0 else 'right',
+                    arrowprops=dict(arrowstyle='-', color='#555555', lw=0.6),
                     bbox=dict(boxstyle="round,pad=0.2", fc="yellow", alpha=0.3))
                     
     from matplotlib.lines import Line2D
     legend_elements = [
-        Line2D([0], [0], marker='o', color='w', label='Inverse Repression (miRNA up / mRNA down)', markerfacecolor='#e41a1c', markersize=10),
-        Line2D([0], [0], marker='o', color='w', label='Co-directional / Feedback Pair', markerfacecolor='#377eb8', markersize=10)
+        Line2D([0], [0], marker='o', color='w', label=f"Opposite sign (n={int((df['Regulatory_Relationship'] == 'Inverse (Repressed Target)').sum())})", markerfacecolor='#e41a1c', markersize=10),
+        Line2D([0], [0], marker='o', color='w', label=f"Same sign, or no 'miRNA' row (n={int((df['Regulatory_Relationship'] != 'Inverse (Repressed Target)').sum())})", markerfacecolor='#377eb8', markersize=10)
     ]
-    ax.legend(handles=legend_elements, loc='lower left')
+    ax.legend(handles=legend_elements, loc='lower right')
     
     plt.tight_layout()
     fig_path = os.path.join(FIGURES_DIR, "Figure3_miRNA_mRNA_Regulatory_Coupling.png")
@@ -174,10 +185,10 @@ def generate_figure3_regulatory_network():
     print(f"Saved Figure 3 to {fig_path}", flush=True)
 
 # ---------------------------------------------------------
-# FIGURE 4: Empirical Functional Pathway Enrichment
+# FIGURE 4: Illustrative Fisher test (typed background)
 # ---------------------------------------------------------
 def generate_figure4_pathway_enrichment():
-    print("Generating Figure 4: Empirical Functional Pathway Enrichment...", flush=True)
+    print("Generating Figure 4: illustrative Fisher test (typed background)...", flush=True)
     path_file = os.path.join(os.path.dirname(__file__), "target_gene_pathway_enrichment.csv")
     if not os.path.exists(path_file):
         return
@@ -190,8 +201,8 @@ def generate_figure4_pathway_enrichment():
     enrichment_scores = df['Enrichment_Score'].values
     
     bars = ax.barh(pathways, enrichment_scores, color='#2c7bb6', edgecolor='black', linewidth=0.8)
-    ax.set_title("Figure 4. Biological Pathways Enriched in MicroRNA-Targeted Genes (Fisher Exact Test)", fontsize=13, fontweight='bold', pad=12)
-    ax.set_xlabel("Empirical Enrichment Score -log10 (Fisher Exact P-Value)", fontsize=11)
+    ax.set_title("Figure 4. ILLUSTRATIVE Fisher test, not an enrichment result\n(typed background: 25,000 genes, 3,500 'DE'; each target counted once per study)", fontsize=12, fontweight='bold', pad=12)
+    ax.set_xlabel("-log10 P under the typed background (illustrative)", fontsize=11)
     
     for i, (bar, mir, pval) in enumerate(zip(bars, df['Key_miRNAs'].values, df['Fisher_PValue'].values)):
         p_str = f"P={pval:.2e}" if pval < 0.001 else f"P={pval:.3f}"
@@ -281,7 +292,7 @@ def generate_figure5_sankey_diagram():
     ax.text(x_tar, 0.95, "Target Transcription Factors & Enzymes", fontsize=13, fontweight='bold', color='#3182bd', ha='center')
     ax.text(x_ont + 0.05, 0.95, "Cellular Effects & Ontologies", fontsize=13, fontweight='bold', color='#31a354')
     
-    ax.set_title("Figure 5. MicroRNA -> Target Gene -> Cellular Ontology Sankey Flow Network", fontsize=14, fontweight='bold', pad=20)
+    ax.set_title("Figure 5. Schematic (no data): literature miRNA -> target -> process relationships", fontsize=14, fontweight='bold', pad=20)
     
     plt.tight_layout()
     fig_path = os.path.join(FIGURES_DIR, "Figure5_miRNA_Target_Ontology_Sankey.png")
@@ -290,10 +301,10 @@ def generate_figure5_sankey_diagram():
     print(f"Saved Figure 5 to {fig_path}", flush=True)
 
 # ---------------------------------------------------------
-# FIGURE 6: Empirical Knowledge Graph of Genetic Features
+# FIGURE 6: Curated miRNA-target-pathway graph
 # ---------------------------------------------------------
 def generate_figure6_knowledge_graph():
-    print("Generating Figure 6: Empirical Genetic Feature & RNA Abundance Knowledge Graph...", flush=True)
+    print("Generating Figure 6: curated miRNA-target-pathway graph...", flush=True)
     net_file = os.path.join(os.path.dirname(__file__), "mirna_mrna_regulatory_network.csv")
     if not os.path.exists(net_file):
         return
@@ -302,7 +313,7 @@ def generate_figure6_knowledge_graph():
     
     G = nx.Graph()
     
-    # Calculate empirical mean fold changes per miRNA and Target Symbol
+    # Mean log2FC per miRNA label and target symbol, from the network table
     mir_lfc_mean = df_net.groupby('miRNA_Family')['miRNA_log2FC'].mean().to_dict()
     tar_lfc_mean = df_net.groupby('Target_Symbol')['Target_log2FC'].mean().to_dict()
     
@@ -322,7 +333,7 @@ def generate_figure6_knowledge_graph():
     for p in pathway_hubs:
         G.add_node(p, layer=2, type='Pathway', color='#abdda4')
         
-    # Add Edges based on empirical regulatory pairings
+    # Add edges for the curated miRNA-target pairs
     for _, row in df_net.drop_duplicates(['miRNA_Family', 'Target_Symbol']).iterrows():
         m_label = f"{row['miRNA_Family']} ({mir_lfc_mean.get(row['miRNA_Family'], 0):+.2f})"
         t_label = f"{row['Target_Symbol']} ({tar_lfc_mean.get(row['Target_Symbol'], 0):+.2f})"
@@ -354,13 +365,13 @@ def generate_figure6_knowledge_graph():
     nx.draw_networkx_edges(G, pos, width=1.8, alpha=0.55, edge_color='#444444', ax=ax)
     nx.draw_networkx_labels(G, pos, font_size=9.0, font_weight='bold', ax=ax)
     
-    ax.set_title("Figure 6. Empirical Knowledge Graph of MicroRNA Regulators, Target Genes, and Pathway Hubs", fontsize=14, fontweight='bold', pad=15)
+    ax.set_title("Figure 6. Curated miRNA-target-pathway graph; node values = mean log2FC of the first\ndeposited contrast (miRNA nodes use mislabelled loci; not interpretable yet)", fontsize=13, fontweight='bold', pad=15)
     ax.axis('off')
     
     from matplotlib.lines import Line2D
     legend_elements = [
-        Line2D([0], [0], marker='o', color='w', label='Upregulated in Spaceflight (mean log2FC > 0)', markerfacecolor='#f46d43', markersize=12),
-        Line2D([0], [0], marker='o', color='w', label='Downregulated in Spaceflight (mean log2FC < 0)', markerfacecolor='#74add1', markersize=12),
+        Line2D([0], [0], marker='o', color='w', label='mean log2FC > 0 (first deposited contrast)', markerfacecolor='#f46d43', markersize=12),
+        Line2D([0], [0], marker='o', color='w', label='mean log2FC < 0 (first deposited contrast)', markerfacecolor='#74add1', markersize=12),
         Line2D([0], [0], marker='o', color='w', label='Cellular Pathway Hub', markerfacecolor='#abdda4', markersize=12)
     ]
     ax.legend(handles=legend_elements, loc='lower center', ncol=3, bbox_to_anchor=(0.5, -0.05))
@@ -372,17 +383,17 @@ def generate_figure6_knowledge_graph():
     print(f"Saved Figure 6 to {fig_path}", flush=True)
 
 # ---------------------------------------------------------
-# FIGURE 7: KEGG / ggPath Style Empirical RNA Coupling Map
+# FIGURE 7: Schematic pathway map with table means
 # ---------------------------------------------------------
 def generate_figure7_kegg_pathway_coupling():
-    print("Generating Figure 7: ggPath / KEGG-Style Empirical Pathway-Level RNA Abundance Coupling Map...", flush=True)
+    print("Generating Figure 7: schematic pathway map with table means...", flush=True)
     net_file = os.path.join(os.path.dirname(__file__), "mirna_mrna_regulatory_network.csv")
     if not os.path.exists(net_file):
         return
         
     df_net = pd.read_csv(net_file)
     
-    # Calculate empirical mean fold changes for key pathway nodes
+    # Mean log2FC from the network table for the nodes that carry a value
     lfc_map = {}
     for mir in ['miR393', 'miR160', 'miR398']:
         sub = df_net[df_net['miRNA_Family'] == mir]
@@ -405,21 +416,23 @@ def generate_figure7_kegg_pathway_coupling():
     
     nodes = [
         # Auxin Cascade
-        {'name': 'Auxin Perception\n(TIR1 / AFB1)', 'x': 0.15, 'y': 0.65, 'fc': lfc_map.get('TIR1', -0.5), 'type': 'mRNA'},
-        {'name': 'miR393 Regulator\n(ath-miR393a)', 'x': 0.15, 'y': 0.78, 'fc': lfc_map.get('miR393', +0.8), 'type': 'miRNA'},
-        {'name': 'Auxin Response TFs\n(ARF10 / ARF16)', 'x': 0.48, 'y': 0.65, 'fc': lfc_map.get('ARF10', -0.6), 'type': 'mRNA'},
-        {'name': 'miR160 Regulator\n(ath-miR160a)', 'x': 0.48, 'y': 0.78, 'fc': lfc_map.get('miR160', +0.7), 'type': 'miRNA'},
-        {'name': 'Root Cap Differentiation &\nGravitropic Bending', 'x': 0.82, 'y': 0.65, 'fc': -1.2, 'type': 'Phenotype'},
+        # Values are means from mirna_mrna_regulatory_network.csv; 'src' names the column
+        # entry used. Phenotype / stress boxes are schematic and carry no value.
+        {'name': 'Auxin Perception\n(TIR1 / AFB1)', 'x': 0.15, 'y': 0.65, 'fc': lfc_map['TIR1'], 'src': 'TIR1', 'type': 'mRNA'},
+        {'name': 'miR393 Regulator\n(map label miR393)', 'x': 0.15, 'y': 0.78, 'fc': lfc_map['miR393'], 'src': 'miR393 rows', 'type': 'miRNA'},
+        {'name': 'Auxin Response TFs\n(ARF10 / ARF16)', 'x': 0.48, 'y': 0.65, 'fc': lfc_map['ARF10'], 'src': 'ARF10', 'type': 'mRNA'},
+        {'name': 'miR160 Regulator\n(map label miR160)', 'x': 0.48, 'y': 0.78, 'fc': lfc_map['miR160'], 'src': 'miR160 rows', 'type': 'miRNA'},
+        {'name': 'Root Cap Differentiation &\nGravitropic Bending', 'x': 0.82, 'y': 0.65, 'type': 'Phenotype'},
         
         # ROS Cascade
-        {'name': 'Superoxide Radicals\n(O2•- Generation)', 'x': 0.15, 'y': 0.20, 'fc': +1.8, 'type': 'Stress'},
-        {'name': 'Cu/Zn Superoxide Dismutase\n(CSD1 / CSD2)', 'x': 0.48, 'y': 0.20, 'fc': lfc_map.get('CSD1', -1.1), 'type': 'mRNA'},
-        {'name': 'miR398 Repressor\n(ath-miR398a)', 'x': 0.48, 'y': 0.08, 'fc': lfc_map.get('miR398', +1.5), 'type': 'miRNA'},
-        {'name': 'H2O2 Accumulation &\nCell Wall Peroxidation', 'x': 0.82, 'y': 0.20, 'fc': +1.5, 'type': 'Phenotype'}
+        {'name': 'Superoxide Radicals\n(O2•- Generation)', 'x': 0.15, 'y': 0.20, 'type': 'Stress'},
+        {'name': 'Cu/Zn Superoxide Dismutase\n(CSD1 / CSD2)', 'x': 0.48, 'y': 0.20, 'fc': lfc_map['CSD1'], 'src': 'CSD1', 'type': 'mRNA'},
+        {'name': 'miR398 Repressor\n(map label miR398)', 'x': 0.48, 'y': 0.08, 'fc': lfc_map['miR398'], 'src': 'miR398 rows', 'type': 'miRNA'},
+        {'name': 'H2O2 Accumulation &\nCell Wall Peroxidation', 'x': 0.82, 'y': 0.20, 'type': 'Phenotype'}
     ]
     
     for n in nodes:
-        fc_str = f" ({n['fc']:+.2f})" if 'fc' in n else ""
+        fc_str = f"\n[{n['src']}: {n['fc']:+.2f}]" if 'fc' in n else ""
         box_fc = '#f46d43' if n.get('fc', 0) > 0 else ('#74add1' if n.get('fc', 0) < 0 else '#ffffff')
         
         ax.text(n['x'], n['y'], f"{n['name']}{fc_str}", va='center', ha='center', fontsize=9.5, fontweight='bold',
@@ -441,16 +454,17 @@ def generate_figure7_kegg_pathway_coupling():
         ax.annotate('', xy=(x2, y2), xytext=(x1, y1),
                     arrowprops=dict(arrowstyle="->" if kind == 'act' else "-|>", color=color, lw=2.5, ls=ls))
                     
-    ax.set_title("Figure 7. ggPath / KEGG-Style Empirical Pathway Map: Synchronized miRNA-mRNA Abundance Coupling", fontsize=14, fontweight='bold', pad=15)
+    ax.set_title("Figure 7. Schematic pathway map. Bracketed values are table means of the first deposited\ncontrast (not flight vs ground; miRNA rows mislabelled). Phenotype/stress boxes carry no data.", fontsize=12.5, fontweight='bold', pad=15)
     
     from matplotlib.lines import Line2D
     legend_elements = [
-        Line2D([0], [0], marker='s', color='w', label='Spaceflight Upregulated (mean log2FC > 0)', markerfacecolor='#f46d43', markersize=12),
-        Line2D([0], [0], marker='s', color='w', label='Spaceflight Downregulated (mean log2FC < 0)', markerfacecolor='#74add1', markersize=12),
+        Line2D([0], [0], marker='s', color='w', label='table mean > 0', markerfacecolor='#f46d43', markersize=12),
+        Line2D([0], [0], marker='s', color='w', label='table mean < 0', markerfacecolor='#74add1', markersize=12),
+        Line2D([0], [0], marker='s', color='w', label='schematic box, no data', markerfacecolor='#ffffff', markeredgecolor='black', markersize=12),
         Line2D([0], [0], color='#d95f02', lw=2, ls='--', label='MicroRNA Repression (Post-Transcriptional)'),
         Line2D([0], [0], color='#2b5c8f', lw=2, ls='-', label='Transcriptional Activation / Flow')
     ]
-    ax.legend(handles=legend_elements, loc='lower center', ncol=4, bbox_to_anchor=(0.5, -0.06))
+    ax.legend(handles=legend_elements, loc='lower center', ncol=5, bbox_to_anchor=(0.5, -0.06), fontsize=9)
     
     plt.tight_layout()
     fig_path = os.path.join(FIGURES_DIR, "Figure7_KEGG_Pathway_RNA_Coupling.png")

@@ -4,7 +4,7 @@ title: "smallRNAseq-DREAM: NASA OSDR Plant Spaceflight microRNA and Non-Coding R
 authors:
   - family-names: "Barker"
     given-names: "Richard John"
-    orcid: "https://orcid.org/0000-0000-0000-0000"
+    orcid: "https://orcid.org/0000-0001-5681-9857"
     affiliation: "University of Wisconsin-Madison / NASA GeneLab Scientific Working Group"
 type: software
 version: 1.0.0
@@ -26,9 +26,19 @@ references:
     authors:
       - family-names: Friedländer
         given-names: Marc R.
+      - family-names: Mackowiak
+        given-names: Sebastian D.
+      - family-names: Li
+        given-names: Na
+      - family-names: Chen
+        given-names: Wei
+      - family-names: Rajewsky
+        given-names: Nikolaus
     title: "miRDeep2 accurately identifies known and hundreds of novel microRNA genes in seven animal clades"
     journal: "Nucleic Acids Research"
     volume: 40
+    issue: 1
     start: 37
     end: 52
     year: 2012
+    doi: "10.1093/nar/gkr688"
