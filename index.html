@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>smallRNAseq-DREAM — NASA OSDR Plant Spaceflight microRNA Audit & Pipeline</title>
-<meta name="description" content="A FAIR, cross-species small RNA-seq (miRNA) analysis framework and NASA OSDR plant spaceflight audit benchmarking four pipelines and mapping gene regulatory networks.">
+<title>smallRNAseq-DREAM — Small RNA-seq Framework &amp; OSDR Plant Inventory</title>
+<meta name="description" content="A FAIR, cross-species small RNA-seq (miRNA) analysis framework with an inventory of NASA OSDR plant RNA-seq studies. The four-engine benchmark is pending.">
 <link rel="stylesheet" href="https://dr-richard-barker.github.io/Plant_response_to_radiation/cose/cose-theme.css">
 <style>
   :root{
@@ -69,147 +69,134 @@
 <header>
   <div class="pills" style="margin-bottom:16px">
     <span class="pill primary">CoSE Space Omics</span>
-    <span class="pill">NASA OSDR Audit</span>
-    <span class="badge done">Peer Review Ready</span>
-    <span class="badge done">Zenodo Archived</span>
+    <span class="pill">NASA OSDR</span>
+    <span class="badge pending">Plant miRNA scan: not interpretable yet</span>
+    <span class="badge pending">Zenodo DOI pending</span>
   </div>
   <h1>smallRNAseq-DREAM</h1>
-  <p class="tag">Comprehensive microRNA and non-coding RNA audit across NASA Open Science Data Repository (OSDR) plant spaceflight experiments.</p>
+  <p class="tag">A cross-species small RNA-seq (miRNA) analysis framework, with an inventory of NASA Open Science Data Repository (OSDR) plant RNA-seq studies.</p>
   <div class="pills">
     <a href="https://github.com/dr-richard-barker/smallRNAseq-DREAM" class="pill primary">GitHub Repository</a>
+    <a href="#status" class="pill">Status</a>
     <a href="#inventory" class="pill">Dataset Inventory</a>
-    <a href="#figures" class="pill">Manuscript Figures</a>
-    <a href="#zenodo" class="pill">Zenodo Archive (v1.0.0)</a>
+    <a href="#figures" class="pill">Figures</a>
+    <a href="#zenodo" class="pill">Reproducibility &amp; Data</a>
   </div>
 </header>
 
 <div class="stat">
-  <div><b>12</b><span>Audited OSDR Spaceflight Datasets</span></div>
-  <div><b>122</b><span>Profiled microRNA & ncRNA Loci</span></div>
-  <div><b>115</b><span>Anti-Correlated Target Pairs</span></div>
-  <div><b>2.4×10⁻⁸</b><span>Fisher Exact Pathway P-Value</span></div>
+  <div><b>12</b><span>OSDR plant RNA-seq studies indexed</span></div>
+  <div><b>0</b><span>plant small RNA-seq studies in OSDR (2026-07 survey)</span></div>
+  <div><b>176</b><span>OSDR studies matched by small-RNA search terms</span></div>
+  <div><b>4</b><span>analysis engines consolidated (benchmark pending)</span></div>
 </div>
 
+<section id="status">
+  <h2><span class="n">01</span>Status of the Plant miRNA Scan</h2>
+  <div class="finding">
+    <p><b>The plant miRNA outputs in this repository are not interpretable yet.</b> An evidence check on 2026-10-28 found three problems:</p>
+    <ul class="clean">
+      <li><b>OSD-437 is standard poly(A) RNA-seq, not small RNA-seq.</b> Its OSDR record lists one RNA-Seq assay (19 samples, library selection "polyA enrichment", NEB Next Ultra II RNA Library Prep Kit). OSDR holds no plant small RNA-seq.</li>
+      <li><b>The locus map mislabels most IDs.</b> Of the 29 IDs the hand-typed map labels as MIR genes, 3 are the named MIR gene. 16 are protein-coding (for example AT1G53160 is <i>SPL4</i>, labelled "MIR156b"), 2 are lncRNA, 1 is snoRNA and 7 are a different MIR gene (Ensembl Plants lookup).</li>
+      <li><b>The fold changes are not flight vs ground.</b> The scan uses the first contrast in each GeneLab table. For OSD-437 that is 1g centrifuge vs microgravity, both in flight. For OSD-120, OSD-218, OSD-565 and OSD-782 it compares ground or treatment groups. For OSD-217 it is ground vs flight, the reverse orientation.</li>
+    </ul>
+    <p><b>TODO:</b> rebuild the locus map from Ensembl Plants miRNA genes, select each study's flight-vs-ground contrast by name, then regenerate the tables and figures. Until then, no miRNA result from this scan should be cited.</p>
+  </div>
+</section>
+
 <section>
-  <h2><span class="n">01</span>The Recommended Pipeline Route</h2>
-  <p class="lead">Consolidating four small RNA-seq analysis engines (<code>nf-core/smrnaseq</code>, <code>sRNAtoolbox</code>, <code>miRDeep2</code>, <code>miRDeep-P2</code>) into a single reproducible cross-species framework.</p>
+  <h2><span class="n">02</span>The Recommended Pipeline Route</h2>
+  <p class="lead">From hands-on testing of four small RNA-seq analysis engines (<code>nf-core/smrnaseq</code>, <code>sRNAtoolbox</code>, <code>miRDeep2</code>, <code>miRDeep-P2</code>), the author recommends this route for cross-species analysis. The quantitative four-engine benchmark has not been run yet.</p>
   <code class="route">SRA → mirnaQC → sRNAbench → sRNAde → mirNOVO</code>
-  <p class="muted">Containerised and deployable on SLURM and NASA OSDR infrastructure for high-throughput spaceflight transcriptomics.</p>
+  <p class="muted">nf-core/smrnaseq runs under Nextflow's container profiles. The original SLURM/OSDR cluster script was lost before consolidation, and the sRNAtoolbox Singularity definition is still to be added.</p>
 </section>
 
 <section id="inventory">
-  <h2><span class="n">02</span>NASA OSDR Plant Spaceflight Dataset Audit</h2>
-  <p>Our empirical audit programmatically indexed 12 core plant spaceflight studies archived in NASA OSDR, identifying dedicated small RNA-Seq (<b>OSD-437</b>) alongside 11 spaceflight bulk RNA-Seq transcriptomes across <i>Arabidopsis thaliana</i>, <i>Solanum lycopersicum</i>, and <i>Brachypodium distachyon</i>.</p>
-  
+  <h2><span class="n">03</span>NASA OSDR Plant Dataset Inventory</h2>
+  <p>Twelve plant RNA-seq studies in NASA OSDR: 9 spaceflight, 1 suborbital (high-altitude) and 2 ground studies, across <i>Arabidopsis thaliana</i>, <i>Brachypodium distachyon</i>, <i>Solanum lycopersicum</i> and <i>Brassica rapa</i>. Values are read from each study's OSDR record (2026-10-28). "Samples" counts the samples in the study's RNA-Seq assay; a blank cell means the record has no value.</p>
+
   <table>
-    <thead><tr><th>Study Accession</th><th>Species</th><th>Mission / Hardware</th><th>Samples</th><th>Primary Assay Modality</th></tr></thead>
+    <thead><tr><th>Study</th><th>Species</th><th>OSDR project type</th><th>Mission</th><th>Platform</th><th>Samples</th><th>Library selection</th></tr></thead>
     <tbody>
-      <tr><td><b>OSD-437</b></td><td><i>Arabidopsis thaliana</i></td><td>SpaceX-14 (Advanced Plant Habitat / APH)</td><td>12</td><td><b>Small RNA-Seq</b> (Dedicated miRNA Profiling)</td></tr>
-      <tr><td><b>OSD-120</b></td><td><i>Arabidopsis thaliana</i></td><td>SpaceX-3 (BRIC-18 / Petri dish)</td><td>12</td><td>Poly(A)-Selected Bulk RNA-Seq</td></tr>
-      <tr><td><b>OSD-218</b></td><td><i>Arabidopsis thaliana</i></td><td>SpaceX-10 (APEX-04 / Petri dish)</td><td>12</td><td>Poly(A)-Selected Bulk RNA-Seq</td></tr>
-      <tr><td><b>OSD-217</b></td><td><i>Arabidopsis thaliana</i></td><td>ISS (EMCS / Tropi-2)</td><td>16</td><td>Total RNA-Seq with rRNA Depletion</td></tr>
-      <tr><td><b>OSD-375</b></td><td><i>Arabidopsis thaliana</i></td><td>ISS (APH / Plant Habitat-01)</td><td>18</td><td>Total RNA-Seq with rRNA Depletion</td></tr>
-      <tr><td><b>OSD-480</b></td><td><i>Arabidopsis thaliana</i></td><td>SpaceX-21 (BRIC-24 / Lighted)</td><td>12</td><td>Poly(A)-Selected Bulk RNA-Seq</td></tr>
-      <tr><td><b>OSD-522</b></td><td><i>Arabidopsis thaliana</i></td><td>ISS (Veggie / VEG-03D)</td><td>16</td><td>Poly(A)-Selected Bulk RNA-Seq</td></tr>
-      <tr><td><b>OSD-565</b></td><td><i>Arabidopsis thaliana</i></td><td>SpaceX-23 (APEX-08)</td><td>12</td><td>Total RNA-Seq with rRNA Depletion</td></tr>
-      <tr><td><b>OSD-624</b></td><td><i>Arabidopsis thaliana</i></td><td>ISS (Veggie / VEG-03E)</td><td>16</td><td>Poly(A)-Selected Bulk RNA-Seq</td></tr>
-      <tr><td><b>OSD-767</b></td><td><i>Arabidopsis thaliana</i></td><td>ISS (EMCS / MULTIGEN-1)</td><td>14</td><td>Poly(A)-Selected Bulk RNA-Seq</td></tr>
-      <tr><td><b>OSD-782</b></td><td><i>Solanum lycopersicum</i></td><td>ISS (Veggie / VEG-05 Tomato)</td><td>12</td><td>Multi-Omics / Bulk RNA-Seq</td></tr>
-      <tr><td><b>OSD-59</b></td><td><i>Brachypodium distachyon</i></td><td>Space Flight (BRIC-16)</td><td>8</td><td>Bulk Transcriptomics</td></tr>
+        <tr><td><b>OSD-437</b></td><td><i>Arabidopsis thaliana</i></td><td>Spaceflight Study</td><td>SpaceX-9</td><td>European Modular Cultivation System (EMCS), Experimental Reference Module (ERM2)</td><td>19</td><td>polyA enrichment</td></tr>
+        <tr><td><b>OSD-120</b></td><td><i>Arabidopsis thaliana</i></td><td>Spaceflight Study</td><td>SpaceX-3</td><td></td><td>36</td><td>ribo-depletion</td></tr>
+        <tr><td><b>OSD-218</b></td><td><i>Arabidopsis thaliana</i></td><td>Spaceflight Study</td><td>SpaceX-5</td><td>Vegetable Production System (VPS/Veggie)</td><td>32</td><td>polyA enrichment</td></tr>
+        <tr><td><b>OSD-217</b></td><td><i>Arabidopsis thaliana</i></td><td>Spaceflight Study</td><td>SpaceX-5</td><td>Vegetable Production System (VPS/Veggie)</td><td>12</td><td>cDNA</td></tr>
+        <tr><td><b>OSD-375</b></td><td><i>Brachypodium distachyon</i></td><td>Spaceflight Study</td><td>SpaceX-14</td><td>Vegetable Production System (VEGGIE), APEX Growth Unit</td><td>48</td><td>Ribo-depletion (32), cDNA (16)</td></tr>
+        <tr><td><b>OSD-480</b></td><td><i>Arabidopsis thaliana</i></td><td>Spaceflight Study</td><td>SpaceX-13</td><td>European Modular Cultivation System (EMCS)</td><td>400</td><td></td></tr>
+        <tr><td><b>OSD-522</b></td><td><i>Arabidopsis thaliana</i></td><td>Spaceflight Study</td><td>SpaceX-13, SpaceX-14</td><td>BRIC-LED</td><td>12</td><td>polyA enrichment</td></tr>
+        <tr><td><b>OSD-565</b></td><td><i>Arabidopsis thaliana</i></td><td>Ground Study</td><td></td><td>KSC Fixation Tubes (KFTs)</td><td>45</td><td>cDNA</td></tr>
+        <tr><td><b>OSD-624</b></td><td><i>Arabidopsis thaliana</i></td><td>High Altitude Study</td><td>Unity 22</td><td>Kennedy Space Center Fixation Tubes (KFTs)</td><td>36</td><td>polyA enrichment</td></tr>
+        <tr><td><b>OSD-767</b></td><td><i>Solanum lycopersicum</i></td><td>Spaceflight Study</td><td>SpaceX-26</td><td>Vegetable Production System (Veggie)</td><td>36</td><td>polyA enrichment</td></tr>
+        <tr><td><b>OSD-782</b></td><td><i>Arabidopsis thaliana</i></td><td>Ground Study</td><td></td><td></td><td>36</td><td>polyA enrichment</td></tr>
+        <tr><td><b>OSD-59</b></td><td><i>Brassica rapa</i></td><td>Spaceflight Study</td><td>Expedition 22</td><td>Lada</td><td>2</td><td>mRNA enrichment</td></tr>
     </tbody>
   </table>
 
   <figure>
-    <img src="figures/Figure1_OSDR_Plant_Dataset_Landscape.png" alt="Figure 1: NASA OSDR Plant Spaceflight Dataset Landscape and Assay Modality Breakdown">
-    <figcaption><b>Figure 1.</b> NASA OSDR plant spaceflight dataset landscape. <b>(A)</b> Distribution of audited spaceflight datasets across species and mission hardware. <b>(B)</b> Stacked bar chart showing assay platform modalities across plant spaceflight transcriptomes.</figcaption>
+    <img src="figures/Figure1_OSDR_Plant_Dataset_Landscape.png" alt="Figure 1: indexed OSDR plant studies by species and by RNA-seq library selection">
+    <figcaption><b>Figure 1.</b> The 12 indexed OSDR plant studies. <b>(A)</b> Studies by species. <b>(B)</b> RNA-seq library selection as recorded in each study's OSDR ISA record; one study (OSD-480) records none.</figcaption>
   </figure>
 </section>
 
 <section id="figures">
-  <h2><span class="n">03</span>MicroRNA Differential Expression & Target Networks</h2>
-  <p>Dedicated small RNA-seq (OSD-437) revealed significant differential expression of key microRNA loci under spaceflight microgravity and hardware stress. Pairing miRNA fold changes with mRNA transcriptomes identified anti-correlated target gene networks ($r = -0.842$).</p>
-
-  <div class="grid">
-    <div class="card">
-      <h3>Key Upregulated MicroRNAs</h3>
-      <ul class="clean">
-        <li><b>ath-miR156a-5p</b> ($\text{Log}_2\text{FC} = +2.45, P = 1.2 \times 10^{-4}$): Suppresses <i>SPL9</i>, delaying vegetative phase change.</li>
-        <li><b>ath-miR160a-5p</b> ($\text{Log}_2\text{FC} = +1.92, P = 4.5 \times 10^{-3}$): Represses Auxin Response Factor <i>ARF10</i>, dampening gravitropic root bending.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Key Downregulated MicroRNAs</h3>
-      <ul class="clean">
-        <li><b>ath-miR398a-3p</b> ($\text{Log}_2\text{FC} = -2.10, P = 8.8 \times 10^{-4}$): De-represses copper-zinc superoxide dismutase <i>CSD2</i>, elevating ROS scavenging under space radiation.</li>
-      </ul>
-    </div>
-  </div>
+  <h2><span class="n">04</span>Exploratory miRNA Scan (Not Interpretable Yet)</h2>
+  <p>These figures plot the scan's current tables. They are kept so the TODO above can be checked against them, not as results.</p>
 
   <figure>
-    <img src="figures/Figure2_microRNA_Differential_Expression.png" alt="Figure 2: MicroRNA Differential Expression Profiles and Spaceflight Volcano Plot">
-    <figcaption><b>Figure 2.</b> MicroRNA differential expression in spaceflight leaves and roots (OSD-437). <b>(A)</b> Volcano plot highlighting significant miRNA loci ($P < 0.05$). <b>(B)</b> Heatmap of variance-stabilized expression across flight and ground controls.</figcaption>
+    <img src="figures/Figure2_microRNA_Differential_Expression.png" alt="Figure 2: log2 fold change of rows labelled as MIR genes by the typed locus map">
+    <figcaption><b>Figure 2.</b> Rows labelled as MIR genes by the typed locus map (most are not miRNA genes). <b>(A)</b> log2FC against −log10 P for the first contrast in each GeneLab table, which is not flight vs ground. <b>(B)</b> log2FC by map label and study; 0.00 marks a missing row.</figcaption>
   </figure>
 
   <figure>
-    <img src="figures/Figure3_miRNA_mRNA_Regulatory_Coupling.png" alt="Figure 3: miRNA-mRNA Inverse Regulatory Pairing Network">
-    <figcaption><b>Figure 3.</b> miRNA-mRNA inverse regulatory target network demonstrating strong negative correlation ($r = -0.842$) between microRNA abundance and target gene expression.</figcaption>
+    <img src="figures/Figure3_miRNA_mRNA_Regulatory_Coupling.png" alt="Figure 3: sign of log2 fold change for curated miRNA-target pairs">
+    <figcaption><b>Figure 3.</b> 115 study-level pairings of 24 hand-curated literature miRNA–target pairs. The x-axis is the mean log2FC of the matching map-labelled rows (mostly not miRNA genes); the y-axis is the target gene's log2FC. 45 of the 115 have opposite signs. No correlation is claimed.</figcaption>
   </figure>
 </section>
 
 <section>
-  <h2><span class="n">04</span>Empirical Fisher Exact Pathway Enrichment</h2>
-  <p>To rigorously quantify functional impact, pathway enrichment significance was computed via SciPy Fisher Exact Tests on $2 \times 2$ contingency tables comparing miRNA target occurrence against background genome loci.</p>
-
-  <div class="finding">
-    <b>Top Enriched Spaceflight Biological Pathways:</b>
-    <ul class="clean" style="margin-top:8px">
-      <li><b>Vegetative Phase Change & Juvenile-to-Adult Transition</b> ($P = 2.41 \times 10^{-8}$) — Mediated by miR156 $\rightarrow$ <i>SPL9</i> repression.</li>
-      <li><b>Auxin Gravitropic Signal Transduction</b> ($P = 4.65 \times 10^{-5}$) — Mediated by miR160 $\rightarrow$ <i>ARF10/ARF16</i> regulation.</li>
-      <li><b>Reactive Oxygen Species (ROS) & Oxidative Stress Defense</b> ($P = 2.40 \times 10^{-3}$) — Mediated by miR398 $\rightarrow$ <i>CSD2</i> activation.</li>
-      <li><b>Cell Wall Remodeling & Expansion</b> ($P = 1.15 \times 10^{-2}$) — Mediated by miR165/166 $\rightarrow$ <i>HD-ZIP III</i> factors.</li>
-    </ul>
-  </div>
+  <h2><span class="n">05</span>Illustrative Fisher Test</h2>
+  <p>For each pathway, a Fisher exact test compares the pairs whose target has P ≤ 0.05 against a typed background of 25,000 genes and 3,500 "DE" genes, assumed rather than measured, and each target is counted once per study. The p-values are therefore illustrative, not an enrichment result. <b>TODO:</b> use each study's measured gene universe and DE set.</p>
 
   <figure>
-    <img src="figures/Figure4_miRNA_Functional_Pathway_Enrichment.png" alt="Figure 4: Empirical Functional Pathway Enrichment">
-    <figcaption><b>Figure 4.</b> Empirical functional pathway enrichment significance ($-\log_{10} P$-value) calculated using Fisher's Exact Test on miRNA target loci vs genome background.</figcaption>
+    <img src="figures/Figure4_miRNA_Functional_Pathway_Enrichment.png" alt="Figure 4: illustrative Fisher test under a typed background">
+    <figcaption><b>Figure 4.</b> Illustrative Fisher test under the typed background; not an enrichment result.</figcaption>
   </figure>
 </section>
 
 <section>
-  <h2><span class="n">05</span>Multi-Dimensional Network Visualizations</h2>
-  <p>We implemented advanced network visualizers to illustrate the flow of genetic information from microRNAs to cellular ontology terms and spatial pathways.</p>
+  <h2><span class="n">06</span>Schematics and Network View</h2>
 
   <figure>
-    <img src="figures/Figure5_miRNA_Target_Ontology_Sankey.png" alt="Figure 5: miRNA Target Ontology Sankey Flow Diagram">
-    <figcaption><b>Figure 5.</b> Sankey flow diagram tracking regulatory flow from microRNA locus $\rightarrow$ target mRNA gene $\rightarrow$ cellular ontology group.</figcaption>
+    <img src="figures/Figure5_miRNA_Target_Ontology_Sankey.png" alt="Figure 5: schematic of literature miRNA to target to process relationships">
+    <figcaption><b>Figure 5.</b> Schematic, no data: literature miRNA → target → process relationships.</figcaption>
   </figure>
 
   <figure>
-    <img src="figures/Figure6_Gene_Abundance_Knowledge_Graph.png" alt="Figure 6: Genetic Feature and RNA Abundance Knowledge Graph">
-    <figcaption><b>Figure 6.</b> Bipartite/Tripartite Knowledge Graph connecting miRNA loci, mRNA targets, fold-change directions, and spaceflight hardware conditions.</figcaption>
+    <img src="figures/Figure6_Gene_Abundance_Knowledge_Graph.png" alt="Figure 6: graph of curated miRNA-target pairs and pathway hubs">
+    <figcaption><b>Figure 6.</b> Graph of the curated miRNA–target pairs and pathway hubs. Node values are mean log2FC of the first deposited contrast; miRNA nodes use mislabelled loci.</figcaption>
   </figure>
 
   <figure>
-    <img src="figures/Figure7_KEGG_Pathway_RNA_Coupling.png" alt="Figure 7: Spatial Pathway-Level RNA Abundance Coupling Map">
-    <figcaption><b>Figure 7.</b> Spatial pathway-level RNA abundance coupling map displaying miRNA suppression vs mRNA target de-repression across metabolic pathways.</figcaption>
+    <img src="figures/Figure7_KEGG_Pathway_RNA_Coupling.png" alt="Figure 7: schematic auxin and ROS pathway map">
+    <figcaption><b>Figure 7.</b> Schematic pathway map. Bracketed values are table means of the first deposited contrast (not flight vs ground; miRNA rows mislabelled). Phenotype and stress boxes carry no data.</figcaption>
   </figure>
 </section>
 
 <section id="zenodo">
-  <h2><span class="n">06</span>Reproducibility, Zenodo & Open Science</h2>
-  <p>The <b>smallRNAseq-DREAM</b> codebase, pipeline scripts, processed count tables, and metadata are 100% open-source and archived for peer review.</p>
+  <h2><span class="n">07</span>Reproducibility &amp; Data</h2>
+  <p>The <b>smallRNAseq-DREAM</b> code is open source under the MIT License. All input data are public NASA OSDR datasets.</p>
 
   <div class="grid">
     <div class="card">
-      <h3>Master Execution Driver</h3>
-      <p>Execute the entire pipeline end-to-end with a single command:</p>
+      <h3>Pipeline Driver</h3>
+      <p>Regenerates the inventory, the scan tables and Figures 1–7 from OSDR downloads:</p>
       <code class="route">python run_pipeline.py</code>
     </div>
     <div class="card">
-      <h3>Zenodo Deposit & Citation</h3>
-      <p>Archived under MIT License with metadata specification (<code>.zenodo.json</code> and <code>CITATION.cff</code>):</p>
-      <p><b>DOI:</b> <a href="https://zenodo.org">10.5281/zenodo.smallRNAseq-DREAM</a></p>
+      <h3>Zenodo Deposit &amp; Citation</h3>
+      <p>Citation metadata are in <code>.zenodo.json</code> and <code>CITATION.cff</code>. A Zenodo deposit of the benchmark bundle is prepared but not yet made.</p>
+      <p><b>Zenodo DOI:</b> pending</p>
     </div>
   </div>
 </section>
@@ -217,7 +204,7 @@
 <footer>
   <div class="wrap" style="padding:0">
     <p><b>smallRNAseq-DREAM</b> · Dr. Richard Barker & Antigravity AI Team · CoSE Space Epigenetics Theme</p>
-    <p class="muted">NASA Open Science Data Repository (OSDR) Plant Spaceflight microRNA Audit</p>
+    <p class="muted">Small RNA-seq framework &amp; NASA Open Science Data Repository (OSDR) plant RNA-seq inventory</p>
   </div>
 </footer>
 
